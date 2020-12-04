@@ -109,7 +109,7 @@ fung.NMDS.plot <- ggplot(data = plot.df,
 
 
 #plot both together
-plot_grid(multSE.plot + theme(legend.position = "none"), fung.NMDS.plot, ncol = 1, labels = "AUTO")
+plot_grid(multSE.plot + theme(legend.position = "none"), fung.NMDS.plot, ncol = 1, labels = c("a", "b"))
 
 ggsave("images/manuscript/S2_MGF_final/S2_MGF_Fig3_v1.png", width = 7, height = 8, units = "in" )
 

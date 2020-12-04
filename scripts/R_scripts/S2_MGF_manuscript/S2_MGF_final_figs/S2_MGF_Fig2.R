@@ -3,11 +3,11 @@
 #Figure 2 - rarefaction curves of diversity and oil
 #Description:   How many samples are necessary to legitimately describe salt marsh soil microbial communities?
 
-#Last updated 11 Nov 2020 by Steve Formel
+#Last updated 3 Dec 2020 by Steve Formel
 
 #Load and Clean data------
 
-source("scripts/R_scripts/S2_load_packages_and_clean_data.R")
+source("scripts/R_scripts/S2_MGF_manuscript/S2_MGF_final_figs/S2_load_packages_and_clean_data.R")
 
 #load libraries-----
 
@@ -46,7 +46,7 @@ rownames(df.taxasums1) <- df.taxasums[,1]
 
 #10 seconds
 
-source("scripts/R_scripts/figs_for_manuscript/S2_MGF_final_figs/iNEXT_parallel.R")
+source("scripts/R_scripts/S2_MGF_manuscript/iNEXT_parallel.R")
 
 Sys.time()
 abund.out <- iNEXT_parallel(x = df.taxasums1, 
@@ -273,10 +273,10 @@ avg.abund.plot <- p1.summary %>%
 
 #plot all 3 plots----
 
-top <- plot_grid(avg.abund.plot + theme(legend.position = "none"), abund.plot + theme(legend.position = "none"), labels = c("A", "B"))
-plot_grid(top, inc.plot  + theme(legend.position = "right"), nrow = 2, labels = c('','C'))
+top <- plot_grid(avg.abund.plot + theme(legend.position = "none"), abund.plot + theme(legend.position = "none"), labels = c("a", "b"))
+plot_grid(top, inc.plot  + theme(legend.position = "right"), nrow = 2, labels = c('','c'))
 
-ggsave("images/manuscript/S2_MGF_final/S2_MGF_Fig2_v2.png", width = 10, height = 8, units = "in")
+ggsave("results/images/manuscript/S2_MGF_final/S2_MGF_Fig2_v2.png", width = 10, height = 8, units = "in")
 
 #calculate min samples for each group-----
 
@@ -567,7 +567,7 @@ inc.plot <- voi.inext.all %>%
   scale_fill_manual(values = c("black", "lightgray")) +
   guides(shape = guide_legend(label = FALSE, override.aes = list(size = 4)))
 
-#ggsave("images/manuscript/S2_.png", width = 8.5, height = 7, units = "in")
+#ggsave("results/images/manuscript/S2_.png", width = 8.5, height = 7, units = "in")
 
 #plot of observed Hill orders by abundance-----
 
@@ -629,10 +629,10 @@ avg_abund <- p1.summary %>%
 
 #plot all 3 plots----
 
-top <- plot_grid(avg_abund + theme(legend.position = "none"), abund.plot + theme(legend.position = "none"), labels = c("A", "B"))
-plot_grid(top, inc.plot  + theme(legend.position = "right"), nrow = 2, labels = c('','C'))
+top <- plot_grid(avg_abund + theme(legend.position = "none"), abund.plot + theme(legend.position = "none"), labels = c("a", "b"))
+plot_grid(top, inc.plot  + theme(legend.position = "right"), nrow = 2, labels = c('','c'))
 
-ggsave("images/manuscript/S2_MGF_final/S2_MGF_Fig2_filtered_v2.png", width = 10, height = 8, units = "in")
+ggsave("results/images/manuscript/S2_MGF_final/S2_MGF_Fig2_filtered_v2.png", width = 10, height = 8, units = "in")
 
 
 #calculate min samples for each group-----
@@ -770,4 +770,4 @@ voi.hill.table <- rbind(voi.hill.table.observed.NF, voi.hill.table.observed.F, v
 
 voi.hill.table
 
-write.csv(voi.hill.table, file = "images/manuscript/S2_MGF_final/S2_MGF_fig2_stats.csv", row.names = FALSE)
+write.csv(voi.hill.table, file = "results/images/manuscript/S2_MGF_final/S2_MGF_fig2_stats.csv", row.names = FALSE)

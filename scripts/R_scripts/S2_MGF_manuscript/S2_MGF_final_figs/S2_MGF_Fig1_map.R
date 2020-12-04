@@ -3,13 +3,13 @@
 #Figure 1 - two season map of oil distribution
 #Description:   Do our results match our experimental strategy? Are there gradients of oil within each site and a large difference between sites?
 
-#Last updated 10 Nov 2020 by Steve Formel
+#Last updated 3 Dec 2020 by Steve Formel
 
 #Major update:  translated figs to color
 
 #Load and Clean data------
 
-source("scripts/R_scripts/S2_load_packages_and_clean_data.R")
+source("scripts/R_scripts/S2_MGF_manuscript/S2_MGF_final_figs/S2_MGF_load_packages_and_clean_data.R")
 
 #load libraries-----
 
@@ -380,13 +380,13 @@ left <- plot_grid(df.PAHs.plot.BJ,
                   legend, 
                   nrow = 3, 
                   rel_heights = c(0.6, 1, 0.1), 
-                  labels = c("A", "B"), 
+                  labels = c("a", "b"), 
                   align = "V")
 
 right <- plot_grid(HO.site, 
                    F.map.no.inset, 
                    nrow = 2, 
-                   labels = c("C", "D"))
+                   labels = c("c", "d"))
 
 #final plot
 
@@ -396,5 +396,5 @@ plot_grid(left,
           rel_widths = c(1,0.75))
 
 #save
-ggsave(filename = "images/manuscript/S2_MGF_final/S2_MG_Fig1_V1.png", width = 8.5, height = 6, units = "in")
+ggsave(filename = "results/images/manuscript/S2_MGF_final/S2_MG_Fig1_V1.png", width = 8.5, height = 6, units = "in")
 
