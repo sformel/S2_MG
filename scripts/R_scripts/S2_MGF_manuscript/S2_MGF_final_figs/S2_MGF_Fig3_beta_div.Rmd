@@ -195,6 +195,9 @@ minsamp.filtered$filtered <- "YES"
 
 multSE.table <- rbind(minsamp.filtered, minsamp.unfiltered)
 
+#Rename columns to be a little more intuitive
+colnames(multSE.table) <- c("Group", "Centroid Mean - Full Set", " Lower CI - Full Set", "Upper CI - Full Set", "Min. number of samples needed")
+
 write.csv(multSE.table, file = "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_fig3_minsamp_table.csv", row.names = FALSE)
 
 ```

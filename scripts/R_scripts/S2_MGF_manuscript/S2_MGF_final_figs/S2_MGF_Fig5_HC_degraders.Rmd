@@ -299,7 +299,7 @@ plot and save
  
 ```{r}
 
-plot_grid(HC.site + labs(title = NULL), HC.season + labs(title = NULL), labels = "AUTO")
+plot_grid(HC.site + labs(title = NULL), HC.season + labs(title = NULL), labels = c("a", "b"))
 
 ggsave("../../../../results/images/manuscript/S2_MGF_final/S2_MGF_Fig5.png", width = 8, height = 5, units = "in")
 

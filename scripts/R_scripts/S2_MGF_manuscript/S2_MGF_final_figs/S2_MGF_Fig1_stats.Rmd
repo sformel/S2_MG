@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, out.width = "100%")
 
 ### S2_MG Manuscript
 
-Last updated 3 Dec 2020 by Steve Formel
+Last updated 6 Dec 2020 by Steve Formel
 
 Figure 1 stats:  model of PAHs between site and season
 Description:   Do our results match our experimental strategy? Are there gradients of oil within each site and a large difference between sites?
@@ -39,7 +39,7 @@ df <- data.frame(sample_data(voi)) %>%
   select(SampleID,
          site,
          season,
-         Total.C1.C3.Chrysenes,
+         Total.C1.C3.chrysenes,
          Total.C1.C4.naphthalenes,
          Total.C1.C4.phenanthrenes,
          Total.C1.C3.dibenzothiophenes,
@@ -74,6 +74,32 @@ https://cran.r-project.org/web/packages/compositions/vignettes/UsingCompositions
 
 ### Explore data
 
+Histogram of total PAHs
+
+```{r}
+
+df %>% 
+  ggplot(aes(x = Total.relevant.PAHs)) + 
+  geom_histogram() +
+  scale_x_log10()
+
+df$PAH_bin <- cut(df$Total.relevant.PAHs, 
+                  breaks = c(0,0.1,1,10,100,1000), 
+                  labels = c("Less than 0.1",
+                             "0.1 to 1",
+                             "1 to 10",
+                             "10 to 100",
+                             "100 to 1000")) 
+
+df %>% 
+  group_by(PAH_bin) %>% 
+  summarise(n = n())
+
+#0.1 to 10 = 63 + 11 = 74 --> 74/82
+
+```
+
+Relative abundance of each PAH class.
 ```{r}
 
 #This transforms each number into it's relative abundance in that sample
@@ -150,7 +176,7 @@ adonis(formula = clr.PAH ~ site*season, data = df.na, permutations = 9999, metho
 ```{r}
 
 CLR.boxplot <- df.clr %>%
-  gather(key = "PAH", value = "clr_val", Total.C1.C3.Chrysenes:Total.C1.C3.dibenzothiophenes) %>%
+  gather(key = "PAH", value = "clr_val", Total.C1.C3.chrysenes:Total.C1.C3.dibenzothiophenes) %>%
   ggplot(aes(x = PAH,
          y = clr_val),
          color = "black") +
@@ -159,7 +185,7 @@ CLR.boxplot <- df.clr %>%
   facet_grid(rows = vars(site), cols = vars(season)) +
   theme_bw() +
   scale_fill_manual(values = cPAL) +
-  scale_x_discrete(labels = c("Chrysenes", "Dibenzothiophenes", "Naphthalenes", "Phenanthrenes")) +
+  scale_x_discrete(labels = c("chrysenes", "dibenzothiophenes", "naphthalenes", "phenanthrenes")) +
   labs(y = "Centered Log-Ratio") +
   theme(legend.position = "none", 
         axis.text.x = element_text(angle = 45, hjust = 1))

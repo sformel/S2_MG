@@ -467,7 +467,7 @@ sordario <- ggplot(data = sb.mod %>%
 
 ```{r}
 
-plot_grid(doth.site + labs(title = NULL,subtitle = "Dothideomycetes"), doth.season + labs(title = NULL,subtitle = "Dothideomycetes"), sordario + labs(title = NULL,subtitle = "Sordarioomycetes"), agarico + labs(title = NULL,subtitle = "Agaricomycetes"), labels = "AUTO")
+plot_grid(doth.site + labs(title = NULL,subtitle = "Dothideomycetes"), doth.season + labs(title = NULL,subtitle = "Dothideomycetes"), sordario + labs(title = NULL,subtitle = "Sordarioomycetes"), agarico + labs(title = NULL,subtitle = "Agaricomycetes"), labels = c("a", "b", "c", "d"))
 
 ggsave("../../../../results/images/manuscript/S2_MGF_final/S2_MGF_Fig4.png", width = 10, height = 8, units = "in")
 
