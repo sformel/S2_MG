@@ -1,0 +1,1290 @@
+# Errors and warnings are written as a tab separated columns, with the first column showing the error or warning, and the second column contains the location of the error or warning, written as row,column, where 0,0 is the top left header item (SampleID).  Problems not specific to a particular data cell will be listed as having 'no location'.
+Errors -----------------------------
+Invalid DNA sequence detected: NNNNNNNN	1,1
+Invalid DNA sequence detected: NNNNNNNN	1,1
+Invalid DNA sequence detected: NNNNNNNN	1,1
+Invalid DNA sequence detected: NNNNNNNN	1,1
+Invalid DNA sequence detected: NNNNNNNN	1,1
+Invalid DNA sequence detected: NNNNNNNN	1,1
+Invalid DNA sequence detected: NNNNNNNN	1,1
+Invalid DNA sequence detected: NNNNNNNN	1,1
+Invalid DNA sequence detected: NNNNNNNN	2,1
+Invalid DNA sequence detected: NNNNNNNN	2,1
+Invalid DNA sequence detected: NNNNNNNN	2,1
+Invalid DNA sequence detected: NNNNNNNN	2,1
+Invalid DNA sequence detected: NNNNNNNN	2,1
+Invalid DNA sequence detected: NNNNNNNN	2,1
+Invalid DNA sequence detected: NNNNNNNN	2,1
+Invalid DNA sequence detected: NNNNNNNN	2,1
+Invalid DNA sequence detected: NNNNNNNN	3,1
+Invalid DNA sequence detected: NNNNNNNN	3,1
+Invalid DNA sequence detected: NNNNNNNN	3,1
+Invalid DNA sequence detected: NNNNNNNN	3,1
+Invalid DNA sequence detected: NNNNNNNN	3,1
+Invalid DNA sequence detected: NNNNNNNN	3,1
+Invalid DNA sequence detected: NNNNNNNN	3,1
+Invalid DNA sequence detected: NNNNNNNN	3,1
+Invalid DNA sequence detected: NNNNNNNN	4,1
+Invalid DNA sequence detected: NNNNNNNN	4,1
+Invalid DNA sequence detected: NNNNNNNN	4,1
+Invalid DNA sequence detected: NNNNNNNN	4,1
+Invalid DNA sequence detected: NNNNNNNN	4,1
+Invalid DNA sequence detected: NNNNNNNN	4,1
+Invalid DNA sequence detected: NNNNNNNN	4,1
+Invalid DNA sequence detected: NNNNNNNN	4,1
+Invalid DNA sequence detected: NNNNNNNN	5,1
+Invalid DNA sequence detected: NNNNNNNN	5,1
+Invalid DNA sequence detected: NNNNNNNN	5,1
+Invalid DNA sequence detected: NNNNNNNN	5,1
+Invalid DNA sequence detected: NNNNNNNN	5,1
+Invalid DNA sequence detected: NNNNNNNN	5,1
+Invalid DNA sequence detected: NNNNNNNN	5,1
+Invalid DNA sequence detected: NNNNNNNN	5,1
+Invalid DNA sequence detected: NNNNNNNN	6,1
+Invalid DNA sequence detected: NNNNNNNN	6,1
+Invalid DNA sequence detected: NNNNNNNN	6,1
+Invalid DNA sequence detected: NNNNNNNN	6,1
+Invalid DNA sequence detected: NNNNNNNN	6,1
+Invalid DNA sequence detected: NNNNNNNN	6,1
+Invalid DNA sequence detected: NNNNNNNN	6,1
+Invalid DNA sequence detected: NNNNNNNN	6,1
+Invalid DNA sequence detected: NNNNNNNN	7,1
+Invalid DNA sequence detected: NNNNNNNN	7,1
+Invalid DNA sequence detected: NNNNNNNN	7,1
+Invalid DNA sequence detected: NNNNNNNN	7,1
+Invalid DNA sequence detected: NNNNNNNN	7,1
+Invalid DNA sequence detected: NNNNNNNN	7,1
+Invalid DNA sequence detected: NNNNNNNN	7,1
+Invalid DNA sequence detected: NNNNNNNN	7,1
+Invalid DNA sequence detected: NNNNNNNN	8,1
+Invalid DNA sequence detected: NNNNNNNN	8,1
+Invalid DNA sequence detected: NNNNNNNN	8,1
+Invalid DNA sequence detected: NNNNNNNN	8,1
+Invalid DNA sequence detected: NNNNNNNN	8,1
+Invalid DNA sequence detected: NNNNNNNN	8,1
+Invalid DNA sequence detected: NNNNNNNN	8,1
+Invalid DNA sequence detected: NNNNNNNN	8,1
+Invalid DNA sequence detected: NNNNNNNN	9,1
+Invalid DNA sequence detected: NNNNNNNN	9,1
+Invalid DNA sequence detected: NNNNNNNN	9,1
+Invalid DNA sequence detected: NNNNNNNN	9,1
+Invalid DNA sequence detected: NNNNNNNN	9,1
+Invalid DNA sequence detected: NNNNNNNN	9,1
+Invalid DNA sequence detected: NNNNNNNN	9,1
+Invalid DNA sequence detected: NNNNNNNN	9,1
+Invalid DNA sequence detected: NNNNNNNN	10,1
+Invalid DNA sequence detected: NNNNNNNN	10,1
+Invalid DNA sequence detected: NNNNNNNN	10,1
+Invalid DNA sequence detected: NNNNNNNN	10,1
+Invalid DNA sequence detected: NNNNNNNN	10,1
+Invalid DNA sequence detected: NNNNNNNN	10,1
+Invalid DNA sequence detected: NNNNNNNN	10,1
+Invalid DNA sequence detected: NNNNNNNN	10,1
+Invalid DNA sequence detected: NNNNNNNN	11,1
+Invalid DNA sequence detected: NNNNNNNN	11,1
+Invalid DNA sequence detected: NNNNNNNN	11,1
+Invalid DNA sequence detected: NNNNNNNN	11,1
+Invalid DNA sequence detected: NNNNNNNN	11,1
+Invalid DNA sequence detected: NNNNNNNN	11,1
+Invalid DNA sequence detected: NNNNNNNN	11,1
+Invalid DNA sequence detected: NNNNNNNN	11,1
+Invalid DNA sequence detected: NNNNNNNN	12,1
+Invalid DNA sequence detected: NNNNNNNN	12,1
+Invalid DNA sequence detected: NNNNNNNN	12,1
+Invalid DNA sequence detected: NNNNNNNN	12,1
+Invalid DNA sequence detected: NNNNNNNN	12,1
+Invalid DNA sequence detected: NNNNNNNN	12,1
+Invalid DNA sequence detected: NNNNNNNN	12,1
+Invalid DNA sequence detected: NNNNNNNN	12,1
+Invalid DNA sequence detected: NNNNNNNN	13,1
+Invalid DNA sequence detected: NNNNNNNN	13,1
+Invalid DNA sequence detected: NNNNNNNN	13,1
+Invalid DNA sequence detected: NNNNNNNN	13,1
+Invalid DNA sequence detected: NNNNNNNN	13,1
+Invalid DNA sequence detected: NNNNNNNN	13,1
+Invalid DNA sequence detected: NNNNNNNN	13,1
+Invalid DNA sequence detected: NNNNNNNN	13,1
+Invalid DNA sequence detected: NNNNNNNN	14,1
+Invalid DNA sequence detected: NNNNNNNN	14,1
+Invalid DNA sequence detected: NNNNNNNN	14,1
+Invalid DNA sequence detected: NNNNNNNN	14,1
+Invalid DNA sequence detected: NNNNNNNN	14,1
+Invalid DNA sequence detected: NNNNNNNN	14,1
+Invalid DNA sequence detected: NNNNNNNN	14,1
+Invalid DNA sequence detected: NNNNNNNN	14,1
+Invalid DNA sequence detected: NNNNNNNN	15,1
+Invalid DNA sequence detected: NNNNNNNN	15,1
+Invalid DNA sequence detected: NNNNNNNN	15,1
+Invalid DNA sequence detected: NNNNNNNN	15,1
+Invalid DNA sequence detected: NNNNNNNN	15,1
+Invalid DNA sequence detected: NNNNNNNN	15,1
+Invalid DNA sequence detected: NNNNNNNN	15,1
+Invalid DNA sequence detected: NNNNNNNN	15,1
+Invalid DNA sequence detected: NNNNNNNN	16,1
+Invalid DNA sequence detected: NNNNNNNN	16,1
+Invalid DNA sequence detected: NNNNNNNN	16,1
+Invalid DNA sequence detected: NNNNNNNN	16,1
+Invalid DNA sequence detected: NNNNNNNN	16,1
+Invalid DNA sequence detected: NNNNNNNN	16,1
+Invalid DNA sequence detected: NNNNNNNN	16,1
+Invalid DNA sequence detected: NNNNNNNN	16,1
+Invalid DNA sequence detected: NNNNNNNN	17,1
+Invalid DNA sequence detected: NNNNNNNN	17,1
+Invalid DNA sequence detected: NNNNNNNN	17,1
+Invalid DNA sequence detected: NNNNNNNN	17,1
+Invalid DNA sequence detected: NNNNNNNN	17,1
+Invalid DNA sequence detected: NNNNNNNN	17,1
+Invalid DNA sequence detected: NNNNNNNN	17,1
+Invalid DNA sequence detected: NNNNNNNN	17,1
+Invalid DNA sequence detected: NNNNNNNN	18,1
+Invalid DNA sequence detected: NNNNNNNN	18,1
+Invalid DNA sequence detected: NNNNNNNN	18,1
+Invalid DNA sequence detected: NNNNNNNN	18,1
+Invalid DNA sequence detected: NNNNNNNN	18,1
+Invalid DNA sequence detected: NNNNNNNN	18,1
+Invalid DNA sequence detected: NNNNNNNN	18,1
+Invalid DNA sequence detected: NNNNNNNN	18,1
+Invalid DNA sequence detected: NNNNNNNN	19,1
+Invalid DNA sequence detected: NNNNNNNN	19,1
+Invalid DNA sequence detected: NNNNNNNN	19,1
+Invalid DNA sequence detected: NNNNNNNN	19,1
+Invalid DNA sequence detected: NNNNNNNN	19,1
+Invalid DNA sequence detected: NNNNNNNN	19,1
+Invalid DNA sequence detected: NNNNNNNN	19,1
+Invalid DNA sequence detected: NNNNNNNN	19,1
+Invalid DNA sequence detected: NNNNNNNN	20,1
+Invalid DNA sequence detected: NNNNNNNN	20,1
+Invalid DNA sequence detected: NNNNNNNN	20,1
+Invalid DNA sequence detected: NNNNNNNN	20,1
+Invalid DNA sequence detected: NNNNNNNN	20,1
+Invalid DNA sequence detected: NNNNNNNN	20,1
+Invalid DNA sequence detected: NNNNNNNN	20,1
+Invalid DNA sequence detected: NNNNNNNN	20,1
+Invalid DNA sequence detected: NNNNNNNN	21,1
+Invalid DNA sequence detected: NNNNNNNN	21,1
+Invalid DNA sequence detected: NNNNNNNN	21,1
+Invalid DNA sequence detected: NNNNNNNN	21,1
+Invalid DNA sequence detected: NNNNNNNN	21,1
+Invalid DNA sequence detected: NNNNNNNN	21,1
+Invalid DNA sequence detected: NNNNNNNN	21,1
+Invalid DNA sequence detected: NNNNNNNN	21,1
+Invalid DNA sequence detected: NNNNNNNN	22,1
+Invalid DNA sequence detected: NNNNNNNN	22,1
+Invalid DNA sequence detected: NNNNNNNN	22,1
+Invalid DNA sequence detected: NNNNNNNN	22,1
+Invalid DNA sequence detected: NNNNNNNN	22,1
+Invalid DNA sequence detected: NNNNNNNN	22,1
+Invalid DNA sequence detected: NNNNNNNN	22,1
+Invalid DNA sequence detected: NNNNNNNN	22,1
+Invalid DNA sequence detected: NNNNNNNN	23,1
+Invalid DNA sequence detected: NNNNNNNN	23,1
+Invalid DNA sequence detected: NNNNNNNN	23,1
+Invalid DNA sequence detected: NNNNNNNN	23,1
+Invalid DNA sequence detected: NNNNNNNN	23,1
+Invalid DNA sequence detected: NNNNNNNN	23,1
+Invalid DNA sequence detected: NNNNNNNN	23,1
+Invalid DNA sequence detected: NNNNNNNN	23,1
+Invalid DNA sequence detected: NNNNNNNN	24,1
+Invalid DNA sequence detected: NNNNNNNN	24,1
+Invalid DNA sequence detected: NNNNNNNN	24,1
+Invalid DNA sequence detected: NNNNNNNN	24,1
+Invalid DNA sequence detected: NNNNNNNN	24,1
+Invalid DNA sequence detected: NNNNNNNN	24,1
+Invalid DNA sequence detected: NNNNNNNN	24,1
+Invalid DNA sequence detected: NNNNNNNN	24,1
+Invalid DNA sequence detected: NNNNNNNN	25,1
+Invalid DNA sequence detected: NNNNNNNN	25,1
+Invalid DNA sequence detected: NNNNNNNN	25,1
+Invalid DNA sequence detected: NNNNNNNN	25,1
+Invalid DNA sequence detected: NNNNNNNN	25,1
+Invalid DNA sequence detected: NNNNNNNN	25,1
+Invalid DNA sequence detected: NNNNNNNN	25,1
+Invalid DNA sequence detected: NNNNNNNN	25,1
+Invalid DNA sequence detected: NNNNNNNN	26,1
+Invalid DNA sequence detected: NNNNNNNN	26,1
+Invalid DNA sequence detected: NNNNNNNN	26,1
+Invalid DNA sequence detected: NNNNNNNN	26,1
+Invalid DNA sequence detected: NNNNNNNN	26,1
+Invalid DNA sequence detected: NNNNNNNN	26,1
+Invalid DNA sequence detected: NNNNNNNN	26,1
+Invalid DNA sequence detected: NNNNNNNN	26,1
+Invalid DNA sequence detected: NNNNNNNN	27,1
+Invalid DNA sequence detected: NNNNNNNN	27,1
+Invalid DNA sequence detected: NNNNNNNN	27,1
+Invalid DNA sequence detected: NNNNNNNN	27,1
+Invalid DNA sequence detected: NNNNNNNN	27,1
+Invalid DNA sequence detected: NNNNNNNN	27,1
+Invalid DNA sequence detected: NNNNNNNN	27,1
+Invalid DNA sequence detected: NNNNNNNN	27,1
+Invalid DNA sequence detected: NNNNNNNN	28,1
+Invalid DNA sequence detected: NNNNNNNN	28,1
+Invalid DNA sequence detected: NNNNNNNN	28,1
+Invalid DNA sequence detected: NNNNNNNN	28,1
+Invalid DNA sequence detected: NNNNNNNN	28,1
+Invalid DNA sequence detected: NNNNNNNN	28,1
+Invalid DNA sequence detected: NNNNNNNN	28,1
+Invalid DNA sequence detected: NNNNNNNN	28,1
+Invalid DNA sequence detected: NNNNNNNN	29,1
+Invalid DNA sequence detected: NNNNNNNN	29,1
+Invalid DNA sequence detected: NNNNNNNN	29,1
+Invalid DNA sequence detected: NNNNNNNN	29,1
+Invalid DNA sequence detected: NNNNNNNN	29,1
+Invalid DNA sequence detected: NNNNNNNN	29,1
+Invalid DNA sequence detected: NNNNNNNN	29,1
+Invalid DNA sequence detected: NNNNNNNN	29,1
+Invalid DNA sequence detected: NNNNNNNN	30,1
+Invalid DNA sequence detected: NNNNNNNN	30,1
+Invalid DNA sequence detected: NNNNNNNN	30,1
+Invalid DNA sequence detected: NNNNNNNN	30,1
+Invalid DNA sequence detected: NNNNNNNN	30,1
+Invalid DNA sequence detected: NNNNNNNN	30,1
+Invalid DNA sequence detected: NNNNNNNN	30,1
+Invalid DNA sequence detected: NNNNNNNN	30,1
+Invalid DNA sequence detected: NNNNNNNN	31,1
+Invalid DNA sequence detected: NNNNNNNN	31,1
+Invalid DNA sequence detected: NNNNNNNN	31,1
+Invalid DNA sequence detected: NNNNNNNN	31,1
+Invalid DNA sequence detected: NNNNNNNN	31,1
+Invalid DNA sequence detected: NNNNNNNN	31,1
+Invalid DNA sequence detected: NNNNNNNN	31,1
+Invalid DNA sequence detected: NNNNNNNN	31,1
+Invalid DNA sequence detected: NNNNNNNN	32,1
+Invalid DNA sequence detected: NNNNNNNN	32,1
+Invalid DNA sequence detected: NNNNNNNN	32,1
+Invalid DNA sequence detected: NNNNNNNN	32,1
+Invalid DNA sequence detected: NNNNNNNN	32,1
+Invalid DNA sequence detected: NNNNNNNN	32,1
+Invalid DNA sequence detected: NNNNNNNN	32,1
+Invalid DNA sequence detected: NNNNNNNN	32,1
+Invalid DNA sequence detected: NNNNNNNN	33,1
+Invalid DNA sequence detected: NNNNNNNN	33,1
+Invalid DNA sequence detected: NNNNNNNN	33,1
+Invalid DNA sequence detected: NNNNNNNN	33,1
+Invalid DNA sequence detected: NNNNNNNN	33,1
+Invalid DNA sequence detected: NNNNNNNN	33,1
+Invalid DNA sequence detected: NNNNNNNN	33,1
+Invalid DNA sequence detected: NNNNNNNN	33,1
+Invalid DNA sequence detected: NNNNNNNN	34,1
+Invalid DNA sequence detected: NNNNNNNN	34,1
+Invalid DNA sequence detected: NNNNNNNN	34,1
+Invalid DNA sequence detected: NNNNNNNN	34,1
+Invalid DNA sequence detected: NNNNNNNN	34,1
+Invalid DNA sequence detected: NNNNNNNN	34,1
+Invalid DNA sequence detected: NNNNNNNN	34,1
+Invalid DNA sequence detected: NNNNNNNN	34,1
+Invalid DNA sequence detected: NNNNNNNN	35,1
+Invalid DNA sequence detected: NNNNNNNN	35,1
+Invalid DNA sequence detected: NNNNNNNN	35,1
+Invalid DNA sequence detected: NNNNNNNN	35,1
+Invalid DNA sequence detected: NNNNNNNN	35,1
+Invalid DNA sequence detected: NNNNNNNN	35,1
+Invalid DNA sequence detected: NNNNNNNN	35,1
+Invalid DNA sequence detected: NNNNNNNN	35,1
+Invalid DNA sequence detected: NNNNNNNN	36,1
+Invalid DNA sequence detected: NNNNNNNN	36,1
+Invalid DNA sequence detected: NNNNNNNN	36,1
+Invalid DNA sequence detected: NNNNNNNN	36,1
+Invalid DNA sequence detected: NNNNNNNN	36,1
+Invalid DNA sequence detected: NNNNNNNN	36,1
+Invalid DNA sequence detected: NNNNNNNN	36,1
+Invalid DNA sequence detected: NNNNNNNN	36,1
+Invalid DNA sequence detected: NNNNNNNN	37,1
+Invalid DNA sequence detected: NNNNNNNN	37,1
+Invalid DNA sequence detected: NNNNNNNN	37,1
+Invalid DNA sequence detected: NNNNNNNN	37,1
+Invalid DNA sequence detected: NNNNNNNN	37,1
+Invalid DNA sequence detected: NNNNNNNN	37,1
+Invalid DNA sequence detected: NNNNNNNN	37,1
+Invalid DNA sequence detected: NNNNNNNN	37,1
+Invalid DNA sequence detected: NNNNNNNN	38,1
+Invalid DNA sequence detected: NNNNNNNN	38,1
+Invalid DNA sequence detected: NNNNNNNN	38,1
+Invalid DNA sequence detected: NNNNNNNN	38,1
+Invalid DNA sequence detected: NNNNNNNN	38,1
+Invalid DNA sequence detected: NNNNNNNN	38,1
+Invalid DNA sequence detected: NNNNNNNN	38,1
+Invalid DNA sequence detected: NNNNNNNN	38,1
+Invalid DNA sequence detected: NNNNNNNN	39,1
+Invalid DNA sequence detected: NNNNNNNN	39,1
+Invalid DNA sequence detected: NNNNNNNN	39,1
+Invalid DNA sequence detected: NNNNNNNN	39,1
+Invalid DNA sequence detected: NNNNNNNN	39,1
+Invalid DNA sequence detected: NNNNNNNN	39,1
+Invalid DNA sequence detected: NNNNNNNN	39,1
+Invalid DNA sequence detected: NNNNNNNN	39,1
+Invalid DNA sequence detected: NNNNNNNN	40,1
+Invalid DNA sequence detected: NNNNNNNN	40,1
+Invalid DNA sequence detected: NNNNNNNN	40,1
+Invalid DNA sequence detected: NNNNNNNN	40,1
+Invalid DNA sequence detected: NNNNNNNN	40,1
+Invalid DNA sequence detected: NNNNNNNN	40,1
+Invalid DNA sequence detected: NNNNNNNN	40,1
+Invalid DNA sequence detected: NNNNNNNN	40,1
+Invalid DNA sequence detected: NNNNNNNN	41,1
+Invalid DNA sequence detected: NNNNNNNN	41,1
+Invalid DNA sequence detected: NNNNNNNN	41,1
+Invalid DNA sequence detected: NNNNNNNN	41,1
+Invalid DNA sequence detected: NNNNNNNN	41,1
+Invalid DNA sequence detected: NNNNNNNN	41,1
+Invalid DNA sequence detected: NNNNNNNN	41,1
+Invalid DNA sequence detected: NNNNNNNN	41,1
+Invalid DNA sequence detected: NNNNNNNN	42,1
+Invalid DNA sequence detected: NNNNNNNN	42,1
+Invalid DNA sequence detected: NNNNNNNN	42,1
+Invalid DNA sequence detected: NNNNNNNN	42,1
+Invalid DNA sequence detected: NNNNNNNN	42,1
+Invalid DNA sequence detected: NNNNNNNN	42,1
+Invalid DNA sequence detected: NNNNNNNN	42,1
+Invalid DNA sequence detected: NNNNNNNN	42,1
+Invalid DNA sequence detected: NNNNNNNN	43,1
+Invalid DNA sequence detected: NNNNNNNN	43,1
+Invalid DNA sequence detected: NNNNNNNN	43,1
+Invalid DNA sequence detected: NNNNNNNN	43,1
+Invalid DNA sequence detected: NNNNNNNN	43,1
+Invalid DNA sequence detected: NNNNNNNN	43,1
+Invalid DNA sequence detected: NNNNNNNN	43,1
+Invalid DNA sequence detected: NNNNNNNN	43,1
+Invalid DNA sequence detected: NNNNNNNN	44,1
+Invalid DNA sequence detected: NNNNNNNN	44,1
+Invalid DNA sequence detected: NNNNNNNN	44,1
+Invalid DNA sequence detected: NNNNNNNN	44,1
+Invalid DNA sequence detected: NNNNNNNN	44,1
+Invalid DNA sequence detected: NNNNNNNN	44,1
+Invalid DNA sequence detected: NNNNNNNN	44,1
+Invalid DNA sequence detected: NNNNNNNN	44,1
+Invalid DNA sequence detected: NNNNNNNN	45,1
+Invalid DNA sequence detected: NNNNNNNN	45,1
+Invalid DNA sequence detected: NNNNNNNN	45,1
+Invalid DNA sequence detected: NNNNNNNN	45,1
+Invalid DNA sequence detected: NNNNNNNN	45,1
+Invalid DNA sequence detected: NNNNNNNN	45,1
+Invalid DNA sequence detected: NNNNNNNN	45,1
+Invalid DNA sequence detected: NNNNNNNN	45,1
+Invalid DNA sequence detected: NNNNNNNN	46,1
+Invalid DNA sequence detected: NNNNNNNN	46,1
+Invalid DNA sequence detected: NNNNNNNN	46,1
+Invalid DNA sequence detected: NNNNNNNN	46,1
+Invalid DNA sequence detected: NNNNNNNN	46,1
+Invalid DNA sequence detected: NNNNNNNN	46,1
+Invalid DNA sequence detected: NNNNNNNN	46,1
+Invalid DNA sequence detected: NNNNNNNN	46,1
+Invalid DNA sequence detected: NNNNNNNN	47,1
+Invalid DNA sequence detected: NNNNNNNN	47,1
+Invalid DNA sequence detected: NNNNNNNN	47,1
+Invalid DNA sequence detected: NNNNNNNN	47,1
+Invalid DNA sequence detected: NNNNNNNN	47,1
+Invalid DNA sequence detected: NNNNNNNN	47,1
+Invalid DNA sequence detected: NNNNNNNN	47,1
+Invalid DNA sequence detected: NNNNNNNN	47,1
+Invalid DNA sequence detected: NNNNNNNN	48,1
+Invalid DNA sequence detected: NNNNNNNN	48,1
+Invalid DNA sequence detected: NNNNNNNN	48,1
+Invalid DNA sequence detected: NNNNNNNN	48,1
+Invalid DNA sequence detected: NNNNNNNN	48,1
+Invalid DNA sequence detected: NNNNNNNN	48,1
+Invalid DNA sequence detected: NNNNNNNN	48,1
+Invalid DNA sequence detected: NNNNNNNN	48,1
+Invalid DNA sequence detected: NNNNNNNN	49,1
+Invalid DNA sequence detected: NNNNNNNN	49,1
+Invalid DNA sequence detected: NNNNNNNN	49,1
+Invalid DNA sequence detected: NNNNNNNN	49,1
+Invalid DNA sequence detected: NNNNNNNN	49,1
+Invalid DNA sequence detected: NNNNNNNN	49,1
+Invalid DNA sequence detected: NNNNNNNN	49,1
+Invalid DNA sequence detected: NNNNNNNN	49,1
+Invalid DNA sequence detected: NNNNNNNN	50,1
+Invalid DNA sequence detected: NNNNNNNN	50,1
+Invalid DNA sequence detected: NNNNNNNN	50,1
+Invalid DNA sequence detected: NNNNNNNN	50,1
+Invalid DNA sequence detected: NNNNNNNN	50,1
+Invalid DNA sequence detected: NNNNNNNN	50,1
+Invalid DNA sequence detected: NNNNNNNN	50,1
+Invalid DNA sequence detected: NNNNNNNN	50,1
+Invalid DNA sequence detected: NNNNNNNN	51,1
+Invalid DNA sequence detected: NNNNNNNN	51,1
+Invalid DNA sequence detected: NNNNNNNN	51,1
+Invalid DNA sequence detected: NNNNNNNN	51,1
+Invalid DNA sequence detected: NNNNNNNN	51,1
+Invalid DNA sequence detected: NNNNNNNN	51,1
+Invalid DNA sequence detected: NNNNNNNN	51,1
+Invalid DNA sequence detected: NNNNNNNN	51,1
+Invalid DNA sequence detected: NNNNNNNN	52,1
+Invalid DNA sequence detected: NNNNNNNN	52,1
+Invalid DNA sequence detected: NNNNNNNN	52,1
+Invalid DNA sequence detected: NNNNNNNN	52,1
+Invalid DNA sequence detected: NNNNNNNN	52,1
+Invalid DNA sequence detected: NNNNNNNN	52,1
+Invalid DNA sequence detected: NNNNNNNN	52,1
+Invalid DNA sequence detected: NNNNNNNN	52,1
+Invalid DNA sequence detected: NNNNNNNN	53,1
+Invalid DNA sequence detected: NNNNNNNN	53,1
+Invalid DNA sequence detected: NNNNNNNN	53,1
+Invalid DNA sequence detected: NNNNNNNN	53,1
+Invalid DNA sequence detected: NNNNNNNN	53,1
+Invalid DNA sequence detected: NNNNNNNN	53,1
+Invalid DNA sequence detected: NNNNNNNN	53,1
+Invalid DNA sequence detected: NNNNNNNN	53,1
+Invalid DNA sequence detected: NNNNNNNN	54,1
+Invalid DNA sequence detected: NNNNNNNN	54,1
+Invalid DNA sequence detected: NNNNNNNN	54,1
+Invalid DNA sequence detected: NNNNNNNN	54,1
+Invalid DNA sequence detected: NNNNNNNN	54,1
+Invalid DNA sequence detected: NNNNNNNN	54,1
+Invalid DNA sequence detected: NNNNNNNN	54,1
+Invalid DNA sequence detected: NNNNNNNN	54,1
+Invalid DNA sequence detected: NNNNNNNN	55,1
+Invalid DNA sequence detected: NNNNNNNN	55,1
+Invalid DNA sequence detected: NNNNNNNN	55,1
+Invalid DNA sequence detected: NNNNNNNN	55,1
+Invalid DNA sequence detected: NNNNNNNN	55,1
+Invalid DNA sequence detected: NNNNNNNN	55,1
+Invalid DNA sequence detected: NNNNNNNN	55,1
+Invalid DNA sequence detected: NNNNNNNN	55,1
+Invalid DNA sequence detected: NNNNNNNN	56,1
+Invalid DNA sequence detected: NNNNNNNN	56,1
+Invalid DNA sequence detected: NNNNNNNN	56,1
+Invalid DNA sequence detected: NNNNNNNN	56,1
+Invalid DNA sequence detected: NNNNNNNN	56,1
+Invalid DNA sequence detected: NNNNNNNN	56,1
+Invalid DNA sequence detected: NNNNNNNN	56,1
+Invalid DNA sequence detected: NNNNNNNN	56,1
+Invalid DNA sequence detected: NNNNNNNN	57,1
+Invalid DNA sequence detected: NNNNNNNN	57,1
+Invalid DNA sequence detected: NNNNNNNN	57,1
+Invalid DNA sequence detected: NNNNNNNN	57,1
+Invalid DNA sequence detected: NNNNNNNN	57,1
+Invalid DNA sequence detected: NNNNNNNN	57,1
+Invalid DNA sequence detected: NNNNNNNN	57,1
+Invalid DNA sequence detected: NNNNNNNN	57,1
+Invalid DNA sequence detected: NNNNNNNN	58,1
+Invalid DNA sequence detected: NNNNNNNN	58,1
+Invalid DNA sequence detected: NNNNNNNN	58,1
+Invalid DNA sequence detected: NNNNNNNN	58,1
+Invalid DNA sequence detected: NNNNNNNN	58,1
+Invalid DNA sequence detected: NNNNNNNN	58,1
+Invalid DNA sequence detected: NNNNNNNN	58,1
+Invalid DNA sequence detected: NNNNNNNN	58,1
+Invalid DNA sequence detected: NNNNNNNN	59,1
+Invalid DNA sequence detected: NNNNNNNN	59,1
+Invalid DNA sequence detected: NNNNNNNN	59,1
+Invalid DNA sequence detected: NNNNNNNN	59,1
+Invalid DNA sequence detected: NNNNNNNN	59,1
+Invalid DNA sequence detected: NNNNNNNN	59,1
+Invalid DNA sequence detected: NNNNNNNN	59,1
+Invalid DNA sequence detected: NNNNNNNN	59,1
+Invalid DNA sequence detected: NNNNNNNN	60,1
+Invalid DNA sequence detected: NNNNNNNN	60,1
+Invalid DNA sequence detected: NNNNNNNN	60,1
+Invalid DNA sequence detected: NNNNNNNN	60,1
+Invalid DNA sequence detected: NNNNNNNN	60,1
+Invalid DNA sequence detected: NNNNNNNN	60,1
+Invalid DNA sequence detected: NNNNNNNN	60,1
+Invalid DNA sequence detected: NNNNNNNN	60,1
+Invalid DNA sequence detected: NNNNNNNN	61,1
+Invalid DNA sequence detected: NNNNNNNN	61,1
+Invalid DNA sequence detected: NNNNNNNN	61,1
+Invalid DNA sequence detected: NNNNNNNN	61,1
+Invalid DNA sequence detected: NNNNNNNN	61,1
+Invalid DNA sequence detected: NNNNNNNN	61,1
+Invalid DNA sequence detected: NNNNNNNN	61,1
+Invalid DNA sequence detected: NNNNNNNN	61,1
+Invalid DNA sequence detected: NNNNNNNN	62,1
+Invalid DNA sequence detected: NNNNNNNN	62,1
+Invalid DNA sequence detected: NNNNNNNN	62,1
+Invalid DNA sequence detected: NNNNNNNN	62,1
+Invalid DNA sequence detected: NNNNNNNN	62,1
+Invalid DNA sequence detected: NNNNNNNN	62,1
+Invalid DNA sequence detected: NNNNNNNN	62,1
+Invalid DNA sequence detected: NNNNNNNN	62,1
+Invalid DNA sequence detected: NNNNNNNN	63,1
+Invalid DNA sequence detected: NNNNNNNN	63,1
+Invalid DNA sequence detected: NNNNNNNN	63,1
+Invalid DNA sequence detected: NNNNNNNN	63,1
+Invalid DNA sequence detected: NNNNNNNN	63,1
+Invalid DNA sequence detected: NNNNNNNN	63,1
+Invalid DNA sequence detected: NNNNNNNN	63,1
+Invalid DNA sequence detected: NNNNNNNN	63,1
+Invalid DNA sequence detected: NNNNNNNN	64,1
+Invalid DNA sequence detected: NNNNNNNN	64,1
+Invalid DNA sequence detected: NNNNNNNN	64,1
+Invalid DNA sequence detected: NNNNNNNN	64,1
+Invalid DNA sequence detected: NNNNNNNN	64,1
+Invalid DNA sequence detected: NNNNNNNN	64,1
+Invalid DNA sequence detected: NNNNNNNN	64,1
+Invalid DNA sequence detected: NNNNNNNN	64,1
+Invalid DNA sequence detected: NNNNNNNN	65,1
+Invalid DNA sequence detected: NNNNNNNN	65,1
+Invalid DNA sequence detected: NNNNNNNN	65,1
+Invalid DNA sequence detected: NNNNNNNN	65,1
+Invalid DNA sequence detected: NNNNNNNN	65,1
+Invalid DNA sequence detected: NNNNNNNN	65,1
+Invalid DNA sequence detected: NNNNNNNN	65,1
+Invalid DNA sequence detected: NNNNNNNN	65,1
+Invalid DNA sequence detected: NNNNNNNN	66,1
+Invalid DNA sequence detected: NNNNNNNN	66,1
+Invalid DNA sequence detected: NNNNNNNN	66,1
+Invalid DNA sequence detected: NNNNNNNN	66,1
+Invalid DNA sequence detected: NNNNNNNN	66,1
+Invalid DNA sequence detected: NNNNNNNN	66,1
+Invalid DNA sequence detected: NNNNNNNN	66,1
+Invalid DNA sequence detected: NNNNNNNN	66,1
+Invalid DNA sequence detected: NNNNNNNN	67,1
+Invalid DNA sequence detected: NNNNNNNN	67,1
+Invalid DNA sequence detected: NNNNNNNN	67,1
+Invalid DNA sequence detected: NNNNNNNN	67,1
+Invalid DNA sequence detected: NNNNNNNN	67,1
+Invalid DNA sequence detected: NNNNNNNN	67,1
+Invalid DNA sequence detected: NNNNNNNN	67,1
+Invalid DNA sequence detected: NNNNNNNN	67,1
+Invalid DNA sequence detected: NNNNNNNN	68,1
+Invalid DNA sequence detected: NNNNNNNN	68,1
+Invalid DNA sequence detected: NNNNNNNN	68,1
+Invalid DNA sequence detected: NNNNNNNN	68,1
+Invalid DNA sequence detected: NNNNNNNN	68,1
+Invalid DNA sequence detected: NNNNNNNN	68,1
+Invalid DNA sequence detected: NNNNNNNN	68,1
+Invalid DNA sequence detected: NNNNNNNN	68,1
+Invalid DNA sequence detected: NNNNNNNN	69,1
+Invalid DNA sequence detected: NNNNNNNN	69,1
+Invalid DNA sequence detected: NNNNNNNN	69,1
+Invalid DNA sequence detected: NNNNNNNN	69,1
+Invalid DNA sequence detected: NNNNNNNN	69,1
+Invalid DNA sequence detected: NNNNNNNN	69,1
+Invalid DNA sequence detected: NNNNNNNN	69,1
+Invalid DNA sequence detected: NNNNNNNN	69,1
+Invalid DNA sequence detected: NNNNNNNN	70,1
+Invalid DNA sequence detected: NNNNNNNN	70,1
+Invalid DNA sequence detected: NNNNNNNN	70,1
+Invalid DNA sequence detected: NNNNNNNN	70,1
+Invalid DNA sequence detected: NNNNNNNN	70,1
+Invalid DNA sequence detected: NNNNNNNN	70,1
+Invalid DNA sequence detected: NNNNNNNN	70,1
+Invalid DNA sequence detected: NNNNNNNN	70,1
+Invalid DNA sequence detected: NNNNNNNN	71,1
+Invalid DNA sequence detected: NNNNNNNN	71,1
+Invalid DNA sequence detected: NNNNNNNN	71,1
+Invalid DNA sequence detected: NNNNNNNN	71,1
+Invalid DNA sequence detected: NNNNNNNN	71,1
+Invalid DNA sequence detected: NNNNNNNN	71,1
+Invalid DNA sequence detected: NNNNNNNN	71,1
+Invalid DNA sequence detected: NNNNNNNN	71,1
+Invalid DNA sequence detected: NNNNNNNN	72,1
+Invalid DNA sequence detected: NNNNNNNN	72,1
+Invalid DNA sequence detected: NNNNNNNN	72,1
+Invalid DNA sequence detected: NNNNNNNN	72,1
+Invalid DNA sequence detected: NNNNNNNN	72,1
+Invalid DNA sequence detected: NNNNNNNN	72,1
+Invalid DNA sequence detected: NNNNNNNN	72,1
+Invalid DNA sequence detected: NNNNNNNN	72,1
+Invalid DNA sequence detected: NNNNNNNN	73,1
+Invalid DNA sequence detected: NNNNNNNN	73,1
+Invalid DNA sequence detected: NNNNNNNN	73,1
+Invalid DNA sequence detected: NNNNNNNN	73,1
+Invalid DNA sequence detected: NNNNNNNN	73,1
+Invalid DNA sequence detected: NNNNNNNN	73,1
+Invalid DNA sequence detected: NNNNNNNN	73,1
+Invalid DNA sequence detected: NNNNNNNN	73,1
+Invalid DNA sequence detected: NNNNNNNN	74,1
+Invalid DNA sequence detected: NNNNNNNN	74,1
+Invalid DNA sequence detected: NNNNNNNN	74,1
+Invalid DNA sequence detected: NNNNNNNN	74,1
+Invalid DNA sequence detected: NNNNNNNN	74,1
+Invalid DNA sequence detected: NNNNNNNN	74,1
+Invalid DNA sequence detected: NNNNNNNN	74,1
+Invalid DNA sequence detected: NNNNNNNN	74,1
+Invalid DNA sequence detected: NNNNNNNN	75,1
+Invalid DNA sequence detected: NNNNNNNN	75,1
+Invalid DNA sequence detected: NNNNNNNN	75,1
+Invalid DNA sequence detected: NNNNNNNN	75,1
+Invalid DNA sequence detected: NNNNNNNN	75,1
+Invalid DNA sequence detected: NNNNNNNN	75,1
+Invalid DNA sequence detected: NNNNNNNN	75,1
+Invalid DNA sequence detected: NNNNNNNN	75,1
+Invalid DNA sequence detected: NNNNNNNN	76,1
+Invalid DNA sequence detected: NNNNNNNN	76,1
+Invalid DNA sequence detected: NNNNNNNN	76,1
+Invalid DNA sequence detected: NNNNNNNN	76,1
+Invalid DNA sequence detected: NNNNNNNN	76,1
+Invalid DNA sequence detected: NNNNNNNN	76,1
+Invalid DNA sequence detected: NNNNNNNN	76,1
+Invalid DNA sequence detected: NNNNNNNN	76,1
+Invalid DNA sequence detected: NNNNNNNN	77,1
+Invalid DNA sequence detected: NNNNNNNN	77,1
+Invalid DNA sequence detected: NNNNNNNN	77,1
+Invalid DNA sequence detected: NNNNNNNN	77,1
+Invalid DNA sequence detected: NNNNNNNN	77,1
+Invalid DNA sequence detected: NNNNNNNN	77,1
+Invalid DNA sequence detected: NNNNNNNN	77,1
+Invalid DNA sequence detected: NNNNNNNN	77,1
+Invalid DNA sequence detected: NNNNNNNN	78,1
+Invalid DNA sequence detected: NNNNNNNN	78,1
+Invalid DNA sequence detected: NNNNNNNN	78,1
+Invalid DNA sequence detected: NNNNNNNN	78,1
+Invalid DNA sequence detected: NNNNNNNN	78,1
+Invalid DNA sequence detected: NNNNNNNN	78,1
+Invalid DNA sequence detected: NNNNNNNN	78,1
+Invalid DNA sequence detected: NNNNNNNN	78,1
+Invalid DNA sequence detected: NNNNNNNN	79,1
+Invalid DNA sequence detected: NNNNNNNN	79,1
+Invalid DNA sequence detected: NNNNNNNN	79,1
+Invalid DNA sequence detected: NNNNNNNN	79,1
+Invalid DNA sequence detected: NNNNNNNN	79,1
+Invalid DNA sequence detected: NNNNNNNN	79,1
+Invalid DNA sequence detected: NNNNNNNN	79,1
+Invalid DNA sequence detected: NNNNNNNN	79,1
+Invalid DNA sequence detected: NNNNNNNN	80,1
+Invalid DNA sequence detected: NNNNNNNN	80,1
+Invalid DNA sequence detected: NNNNNNNN	80,1
+Invalid DNA sequence detected: NNNNNNNN	80,1
+Invalid DNA sequence detected: NNNNNNNN	80,1
+Invalid DNA sequence detected: NNNNNNNN	80,1
+Invalid DNA sequence detected: NNNNNNNN	80,1
+Invalid DNA sequence detected: NNNNNNNN	80,1
+Invalid DNA sequence detected: NNNNNNNN	81,1
+Invalid DNA sequence detected: NNNNNNNN	81,1
+Invalid DNA sequence detected: NNNNNNNN	81,1
+Invalid DNA sequence detected: NNNNNNNN	81,1
+Invalid DNA sequence detected: NNNNNNNN	81,1
+Invalid DNA sequence detected: NNNNNNNN	81,1
+Invalid DNA sequence detected: NNNNNNNN	81,1
+Invalid DNA sequence detected: NNNNNNNN	81,1
+Invalid DNA sequence detected: NNNNNNNN	82,1
+Invalid DNA sequence detected: NNNNNNNN	82,1
+Invalid DNA sequence detected: NNNNNNNN	82,1
+Invalid DNA sequence detected: NNNNNNNN	82,1
+Invalid DNA sequence detected: NNNNNNNN	82,1
+Invalid DNA sequence detected: NNNNNNNN	82,1
+Invalid DNA sequence detected: NNNNNNNN	82,1
+Invalid DNA sequence detected: NNNNNNNN	82,1
+Invalid DNA sequence detected: NNNNNNNN	83,1
+Invalid DNA sequence detected: NNNNNNNN	83,1
+Invalid DNA sequence detected: NNNNNNNN	83,1
+Invalid DNA sequence detected: NNNNNNNN	83,1
+Invalid DNA sequence detected: NNNNNNNN	83,1
+Invalid DNA sequence detected: NNNNNNNN	83,1
+Invalid DNA sequence detected: NNNNNNNN	83,1
+Invalid DNA sequence detected: NNNNNNNN	83,1
+Invalid DNA sequence detected: NNNNNNNN	84,1
+Invalid DNA sequence detected: NNNNNNNN	84,1
+Invalid DNA sequence detected: NNNNNNNN	84,1
+Invalid DNA sequence detected: NNNNNNNN	84,1
+Invalid DNA sequence detected: NNNNNNNN	84,1
+Invalid DNA sequence detected: NNNNNNNN	84,1
+Invalid DNA sequence detected: NNNNNNNN	84,1
+Invalid DNA sequence detected: NNNNNNNN	84,1
+Invalid DNA sequence detected: NNNNNNNN	85,1
+Invalid DNA sequence detected: NNNNNNNN	85,1
+Invalid DNA sequence detected: NNNNNNNN	85,1
+Invalid DNA sequence detected: NNNNNNNN	85,1
+Invalid DNA sequence detected: NNNNNNNN	85,1
+Invalid DNA sequence detected: NNNNNNNN	85,1
+Invalid DNA sequence detected: NNNNNNNN	85,1
+Invalid DNA sequence detected: NNNNNNNN	85,1
+Invalid DNA sequence detected: NNNNNNNN	86,1
+Invalid DNA sequence detected: NNNNNNNN	86,1
+Invalid DNA sequence detected: NNNNNNNN	86,1
+Invalid DNA sequence detected: NNNNNNNN	86,1
+Invalid DNA sequence detected: NNNNNNNN	86,1
+Invalid DNA sequence detected: NNNNNNNN	86,1
+Invalid DNA sequence detected: NNNNNNNN	86,1
+Invalid DNA sequence detected: NNNNNNNN	86,1
+Invalid DNA sequence detected: NNNNNNNN	87,1
+Invalid DNA sequence detected: NNNNNNNN	87,1
+Invalid DNA sequence detected: NNNNNNNN	87,1
+Invalid DNA sequence detected: NNNNNNNN	87,1
+Invalid DNA sequence detected: NNNNNNNN	87,1
+Invalid DNA sequence detected: NNNNNNNN	87,1
+Invalid DNA sequence detected: NNNNNNNN	87,1
+Invalid DNA sequence detected: NNNNNNNN	87,1
+Invalid DNA sequence detected: NNNNNNNN	88,1
+Invalid DNA sequence detected: NNNNNNNN	88,1
+Invalid DNA sequence detected: NNNNNNNN	88,1
+Invalid DNA sequence detected: NNNNNNNN	88,1
+Invalid DNA sequence detected: NNNNNNNN	88,1
+Invalid DNA sequence detected: NNNNNNNN	88,1
+Invalid DNA sequence detected: NNNNNNNN	88,1
+Invalid DNA sequence detected: NNNNNNNN	88,1
+Invalid DNA sequence detected: NNNNNNNN	89,1
+Invalid DNA sequence detected: NNNNNNNN	89,1
+Invalid DNA sequence detected: NNNNNNNN	89,1
+Invalid DNA sequence detected: NNNNNNNN	89,1
+Invalid DNA sequence detected: NNNNNNNN	89,1
+Invalid DNA sequence detected: NNNNNNNN	89,1
+Invalid DNA sequence detected: NNNNNNNN	89,1
+Invalid DNA sequence detected: NNNNNNNN	89,1
+Invalid DNA sequence detected: NNNNNNNN	90,1
+Invalid DNA sequence detected: NNNNNNNN	90,1
+Invalid DNA sequence detected: NNNNNNNN	90,1
+Invalid DNA sequence detected: NNNNNNNN	90,1
+Invalid DNA sequence detected: NNNNNNNN	90,1
+Invalid DNA sequence detected: NNNNNNNN	90,1
+Invalid DNA sequence detected: NNNNNNNN	90,1
+Invalid DNA sequence detected: NNNNNNNN	90,1
+Invalid DNA sequence detected: NNNNNNNN	91,1
+Invalid DNA sequence detected: NNNNNNNN	91,1
+Invalid DNA sequence detected: NNNNNNNN	91,1
+Invalid DNA sequence detected: NNNNNNNN	91,1
+Invalid DNA sequence detected: NNNNNNNN	91,1
+Invalid DNA sequence detected: NNNNNNNN	91,1
+Invalid DNA sequence detected: NNNNNNNN	91,1
+Invalid DNA sequence detected: NNNNNNNN	91,1
+Invalid DNA sequence detected: NNNNNNNN	92,1
+Invalid DNA sequence detected: NNNNNNNN	92,1
+Invalid DNA sequence detected: NNNNNNNN	92,1
+Invalid DNA sequence detected: NNNNNNNN	92,1
+Invalid DNA sequence detected: NNNNNNNN	92,1
+Invalid DNA sequence detected: NNNNNNNN	92,1
+Invalid DNA sequence detected: NNNNNNNN	92,1
+Invalid DNA sequence detected: NNNNNNNN	92,1
+Invalid DNA sequence detected: NNNNNNNN	93,1
+Invalid DNA sequence detected: NNNNNNNN	93,1
+Invalid DNA sequence detected: NNNNNNNN	93,1
+Invalid DNA sequence detected: NNNNNNNN	93,1
+Invalid DNA sequence detected: NNNNNNNN	93,1
+Invalid DNA sequence detected: NNNNNNNN	93,1
+Invalid DNA sequence detected: NNNNNNNN	93,1
+Invalid DNA sequence detected: NNNNNNNN	93,1
+Invalid DNA sequence detected: NNNNNNNN	94,1
+Invalid DNA sequence detected: NNNNNNNN	94,1
+Invalid DNA sequence detected: NNNNNNNN	94,1
+Invalid DNA sequence detected: NNNNNNNN	94,1
+Invalid DNA sequence detected: NNNNNNNN	94,1
+Invalid DNA sequence detected: NNNNNNNN	94,1
+Invalid DNA sequence detected: NNNNNNNN	94,1
+Invalid DNA sequence detected: NNNNNNNN	94,1
+Invalid DNA sequence detected: NNNNNNNN	95,1
+Invalid DNA sequence detected: NNNNNNNN	95,1
+Invalid DNA sequence detected: NNNNNNNN	95,1
+Invalid DNA sequence detected: NNNNNNNN	95,1
+Invalid DNA sequence detected: NNNNNNNN	95,1
+Invalid DNA sequence detected: NNNNNNNN	95,1
+Invalid DNA sequence detected: NNNNNNNN	95,1
+Invalid DNA sequence detected: NNNNNNNN	95,1
+Invalid DNA sequence detected: NNNNNNNN	96,1
+Invalid DNA sequence detected: NNNNNNNN	96,1
+Invalid DNA sequence detected: NNNNNNNN	96,1
+Invalid DNA sequence detected: NNNNNNNN	96,1
+Invalid DNA sequence detected: NNNNNNNN	96,1
+Invalid DNA sequence detected: NNNNNNNN	96,1
+Invalid DNA sequence detected: NNNNNNNN	96,1
+Invalid DNA sequence detected: NNNNNNNN	96,1
+Invalid DNA sequence detected: NNNNNNNN	97,1
+Invalid DNA sequence detected: NNNNNNNN	97,1
+Invalid DNA sequence detected: NNNNNNNN	97,1
+Invalid DNA sequence detected: NNNNNNNN	97,1
+Invalid DNA sequence detected: NNNNNNNN	97,1
+Invalid DNA sequence detected: NNNNNNNN	97,1
+Invalid DNA sequence detected: NNNNNNNN	97,1
+Invalid DNA sequence detected: NNNNNNNN	97,1
+Invalid DNA sequence detected: NNNNNNNN	98,1
+Invalid DNA sequence detected: NNNNNNNN	98,1
+Invalid DNA sequence detected: NNNNNNNN	98,1
+Invalid DNA sequence detected: NNNNNNNN	98,1
+Invalid DNA sequence detected: NNNNNNNN	98,1
+Invalid DNA sequence detected: NNNNNNNN	98,1
+Invalid DNA sequence detected: NNNNNNNN	98,1
+Invalid DNA sequence detected: NNNNNNNN	98,1
+Invalid DNA sequence detected: NNNNNNNN	99,1
+Invalid DNA sequence detected: NNNNNNNN	99,1
+Invalid DNA sequence detected: NNNNNNNN	99,1
+Invalid DNA sequence detected: NNNNNNNN	99,1
+Invalid DNA sequence detected: NNNNNNNN	99,1
+Invalid DNA sequence detected: NNNNNNNN	99,1
+Invalid DNA sequence detected: NNNNNNNN	99,1
+Invalid DNA sequence detected: NNNNNNNN	99,1
+Invalid DNA sequence detected: NNNNNNNN	100,1
+Invalid DNA sequence detected: NNNNNNNN	100,1
+Invalid DNA sequence detected: NNNNNNNN	100,1
+Invalid DNA sequence detected: NNNNNNNN	100,1
+Invalid DNA sequence detected: NNNNNNNN	100,1
+Invalid DNA sequence detected: NNNNNNNN	100,1
+Invalid DNA sequence detected: NNNNNNNN	100,1
+Invalid DNA sequence detected: NNNNNNNN	100,1
+Invalid DNA sequence detected: NNNNNNNN	101,1
+Invalid DNA sequence detected: NNNNNNNN	101,1
+Invalid DNA sequence detected: NNNNNNNN	101,1
+Invalid DNA sequence detected: NNNNNNNN	101,1
+Invalid DNA sequence detected: NNNNNNNN	101,1
+Invalid DNA sequence detected: NNNNNNNN	101,1
+Invalid DNA sequence detected: NNNNNNNN	101,1
+Invalid DNA sequence detected: NNNNNNNN	101,1
+Invalid DNA sequence detected: NNNNNNNN	102,1
+Invalid DNA sequence detected: NNNNNNNN	102,1
+Invalid DNA sequence detected: NNNNNNNN	102,1
+Invalid DNA sequence detected: NNNNNNNN	102,1
+Invalid DNA sequence detected: NNNNNNNN	102,1
+Invalid DNA sequence detected: NNNNNNNN	102,1
+Invalid DNA sequence detected: NNNNNNNN	102,1
+Invalid DNA sequence detected: NNNNNNNN	102,1
+Invalid DNA sequence detected: NNNNNNNN	103,1
+Invalid DNA sequence detected: NNNNNNNN	103,1
+Invalid DNA sequence detected: NNNNNNNN	103,1
+Invalid DNA sequence detected: NNNNNNNN	103,1
+Invalid DNA sequence detected: NNNNNNNN	103,1
+Invalid DNA sequence detected: NNNNNNNN	103,1
+Invalid DNA sequence detected: NNNNNNNN	103,1
+Invalid DNA sequence detected: NNNNNNNN	103,1
+Invalid DNA sequence detected: NNNNNNNN	104,1
+Invalid DNA sequence detected: NNNNNNNN	104,1
+Invalid DNA sequence detected: NNNNNNNN	104,1
+Invalid DNA sequence detected: NNNNNNNN	104,1
+Invalid DNA sequence detected: NNNNNNNN	104,1
+Invalid DNA sequence detected: NNNNNNNN	104,1
+Invalid DNA sequence detected: NNNNNNNN	104,1
+Invalid DNA sequence detected: NNNNNNNN	104,1
+Invalid DNA sequence detected: NNNNNNNN	105,1
+Invalid DNA sequence detected: NNNNNNNN	105,1
+Invalid DNA sequence detected: NNNNNNNN	105,1
+Invalid DNA sequence detected: NNNNNNNN	105,1
+Invalid DNA sequence detected: NNNNNNNN	105,1
+Invalid DNA sequence detected: NNNNNNNN	105,1
+Invalid DNA sequence detected: NNNNNNNN	105,1
+Invalid DNA sequence detected: NNNNNNNN	105,1
+Invalid DNA sequence detected: NNNNNNNN	106,1
+Invalid DNA sequence detected: NNNNNNNN	106,1
+Invalid DNA sequence detected: NNNNNNNN	106,1
+Invalid DNA sequence detected: NNNNNNNN	106,1
+Invalid DNA sequence detected: NNNNNNNN	106,1
+Invalid DNA sequence detected: NNNNNNNN	106,1
+Invalid DNA sequence detected: NNNNNNNN	106,1
+Invalid DNA sequence detected: NNNNNNNN	106,1
+Invalid DNA sequence detected: NNNNNNNN	107,1
+Invalid DNA sequence detected: NNNNNNNN	107,1
+Invalid DNA sequence detected: NNNNNNNN	107,1
+Invalid DNA sequence detected: NNNNNNNN	107,1
+Invalid DNA sequence detected: NNNNNNNN	107,1
+Invalid DNA sequence detected: NNNNNNNN	107,1
+Invalid DNA sequence detected: NNNNNNNN	107,1
+Invalid DNA sequence detected: NNNNNNNN	107,1
+Invalid DNA sequence detected: NNNNNNNN	108,1
+Invalid DNA sequence detected: NNNNNNNN	108,1
+Invalid DNA sequence detected: NNNNNNNN	108,1
+Invalid DNA sequence detected: NNNNNNNN	108,1
+Invalid DNA sequence detected: NNNNNNNN	108,1
+Invalid DNA sequence detected: NNNNNNNN	108,1
+Invalid DNA sequence detected: NNNNNNNN	108,1
+Invalid DNA sequence detected: NNNNNNNN	108,1
+Invalid DNA sequence detected: NNNNNNNN	109,1
+Invalid DNA sequence detected: NNNNNNNN	109,1
+Invalid DNA sequence detected: NNNNNNNN	109,1
+Invalid DNA sequence detected: NNNNNNNN	109,1
+Invalid DNA sequence detected: NNNNNNNN	109,1
+Invalid DNA sequence detected: NNNNNNNN	109,1
+Invalid DNA sequence detected: NNNNNNNN	109,1
+Invalid DNA sequence detected: NNNNNNNN	109,1
+Invalid DNA sequence detected: NNNNNNNN	110,1
+Invalid DNA sequence detected: NNNNNNNN	110,1
+Invalid DNA sequence detected: NNNNNNNN	110,1
+Invalid DNA sequence detected: NNNNNNNN	110,1
+Invalid DNA sequence detected: NNNNNNNN	110,1
+Invalid DNA sequence detected: NNNNNNNN	110,1
+Invalid DNA sequence detected: NNNNNNNN	110,1
+Invalid DNA sequence detected: NNNNNNNN	110,1
+Invalid DNA sequence detected: NNNNNNNN	111,1
+Invalid DNA sequence detected: NNNNNNNN	111,1
+Invalid DNA sequence detected: NNNNNNNN	111,1
+Invalid DNA sequence detected: NNNNNNNN	111,1
+Invalid DNA sequence detected: NNNNNNNN	111,1
+Invalid DNA sequence detected: NNNNNNNN	111,1
+Invalid DNA sequence detected: NNNNNNNN	111,1
+Invalid DNA sequence detected: NNNNNNNN	111,1
+Invalid DNA sequence detected: NNNNNNNN	112,1
+Invalid DNA sequence detected: NNNNNNNN	112,1
+Invalid DNA sequence detected: NNNNNNNN	112,1
+Invalid DNA sequence detected: NNNNNNNN	112,1
+Invalid DNA sequence detected: NNNNNNNN	112,1
+Invalid DNA sequence detected: NNNNNNNN	112,1
+Invalid DNA sequence detected: NNNNNNNN	112,1
+Invalid DNA sequence detected: NNNNNNNN	112,1
+Invalid DNA sequence detected: NNNNNNNN	113,1
+Invalid DNA sequence detected: NNNNNNNN	113,1
+Invalid DNA sequence detected: NNNNNNNN	113,1
+Invalid DNA sequence detected: NNNNNNNN	113,1
+Invalid DNA sequence detected: NNNNNNNN	113,1
+Invalid DNA sequence detected: NNNNNNNN	113,1
+Invalid DNA sequence detected: NNNNNNNN	113,1
+Invalid DNA sequence detected: NNNNNNNN	113,1
+Invalid DNA sequence detected: NNNNNNNN	114,1
+Invalid DNA sequence detected: NNNNNNNN	114,1
+Invalid DNA sequence detected: NNNNNNNN	114,1
+Invalid DNA sequence detected: NNNNNNNN	114,1
+Invalid DNA sequence detected: NNNNNNNN	114,1
+Invalid DNA sequence detected: NNNNNNNN	114,1
+Invalid DNA sequence detected: NNNNNNNN	114,1
+Invalid DNA sequence detected: NNNNNNNN	114,1
+Invalid DNA sequence detected: NNNNNNNN	115,1
+Invalid DNA sequence detected: NNNNNNNN	115,1
+Invalid DNA sequence detected: NNNNNNNN	115,1
+Invalid DNA sequence detected: NNNNNNNN	115,1
+Invalid DNA sequence detected: NNNNNNNN	115,1
+Invalid DNA sequence detected: NNNNNNNN	115,1
+Invalid DNA sequence detected: NNNNNNNN	115,1
+Invalid DNA sequence detected: NNNNNNNN	115,1
+Invalid DNA sequence detected: NNNNNNNN	116,1
+Invalid DNA sequence detected: NNNNNNNN	116,1
+Invalid DNA sequence detected: NNNNNNNN	116,1
+Invalid DNA sequence detected: NNNNNNNN	116,1
+Invalid DNA sequence detected: NNNNNNNN	116,1
+Invalid DNA sequence detected: NNNNNNNN	116,1
+Invalid DNA sequence detected: NNNNNNNN	116,1
+Invalid DNA sequence detected: NNNNNNNN	116,1
+Invalid DNA sequence detected: NNNNNNNN	117,1
+Invalid DNA sequence detected: NNNNNNNN	117,1
+Invalid DNA sequence detected: NNNNNNNN	117,1
+Invalid DNA sequence detected: NNNNNNNN	117,1
+Invalid DNA sequence detected: NNNNNNNN	117,1
+Invalid DNA sequence detected: NNNNNNNN	117,1
+Invalid DNA sequence detected: NNNNNNNN	117,1
+Invalid DNA sequence detected: NNNNNNNN	117,1
+Invalid DNA sequence detected: NNNNNNNN	118,1
+Invalid DNA sequence detected: NNNNNNNN	118,1
+Invalid DNA sequence detected: NNNNNNNN	118,1
+Invalid DNA sequence detected: NNNNNNNN	118,1
+Invalid DNA sequence detected: NNNNNNNN	118,1
+Invalid DNA sequence detected: NNNNNNNN	118,1
+Invalid DNA sequence detected: NNNNNNNN	118,1
+Invalid DNA sequence detected: NNNNNNNN	118,1
+Invalid DNA sequence detected: NNNNNNNN	119,1
+Invalid DNA sequence detected: NNNNNNNN	119,1
+Invalid DNA sequence detected: NNNNNNNN	119,1
+Invalid DNA sequence detected: NNNNNNNN	119,1
+Invalid DNA sequence detected: NNNNNNNN	119,1
+Invalid DNA sequence detected: NNNNNNNN	119,1
+Invalid DNA sequence detected: NNNNNNNN	119,1
+Invalid DNA sequence detected: NNNNNNNN	119,1
+Invalid DNA sequence detected: NNNNNNNN	120,1
+Invalid DNA sequence detected: NNNNNNNN	120,1
+Invalid DNA sequence detected: NNNNNNNN	120,1
+Invalid DNA sequence detected: NNNNNNNN	120,1
+Invalid DNA sequence detected: NNNNNNNN	120,1
+Invalid DNA sequence detected: NNNNNNNN	120,1
+Invalid DNA sequence detected: NNNNNNNN	120,1
+Invalid DNA sequence detected: NNNNNNNN	120,1
+Invalid DNA sequence detected: NNNNNNNN	121,1
+Invalid DNA sequence detected: NNNNNNNN	121,1
+Invalid DNA sequence detected: NNNNNNNN	121,1
+Invalid DNA sequence detected: NNNNNNNN	121,1
+Invalid DNA sequence detected: NNNNNNNN	121,1
+Invalid DNA sequence detected: NNNNNNNN	121,1
+Invalid DNA sequence detected: NNNNNNNN	121,1
+Invalid DNA sequence detected: NNNNNNNN	121,1
+Invalid DNA sequence detected: NNNNNNNN	122,1
+Invalid DNA sequence detected: NNNNNNNN	122,1
+Invalid DNA sequence detected: NNNNNNNN	122,1
+Invalid DNA sequence detected: NNNNNNNN	122,1
+Invalid DNA sequence detected: NNNNNNNN	122,1
+Invalid DNA sequence detected: NNNNNNNN	122,1
+Invalid DNA sequence detected: NNNNNNNN	122,1
+Invalid DNA sequence detected: NNNNNNNN	122,1
+Invalid DNA sequence detected: NNNNNNNN	123,1
+Invalid DNA sequence detected: NNNNNNNN	123,1
+Invalid DNA sequence detected: NNNNNNNN	123,1
+Invalid DNA sequence detected: NNNNNNNN	123,1
+Invalid DNA sequence detected: NNNNNNNN	123,1
+Invalid DNA sequence detected: NNNNNNNN	123,1
+Invalid DNA sequence detected: NNNNNNNN	123,1
+Invalid DNA sequence detected: NNNNNNNN	123,1
+Invalid DNA sequence detected: NNNNNNNN	124,1
+Invalid DNA sequence detected: NNNNNNNN	124,1
+Invalid DNA sequence detected: NNNNNNNN	124,1
+Invalid DNA sequence detected: NNNNNNNN	124,1
+Invalid DNA sequence detected: NNNNNNNN	124,1
+Invalid DNA sequence detected: NNNNNNNN	124,1
+Invalid DNA sequence detected: NNNNNNNN	124,1
+Invalid DNA sequence detected: NNNNNNNN	124,1
+Invalid DNA sequence detected: NNNNNNNN	125,1
+Invalid DNA sequence detected: NNNNNNNN	125,1
+Invalid DNA sequence detected: NNNNNNNN	125,1
+Invalid DNA sequence detected: NNNNNNNN	125,1
+Invalid DNA sequence detected: NNNNNNNN	125,1
+Invalid DNA sequence detected: NNNNNNNN	125,1
+Invalid DNA sequence detected: NNNNNNNN	125,1
+Invalid DNA sequence detected: NNNNNNNN	125,1
+Invalid DNA sequence detected: NNNNNNNN	126,1
+Invalid DNA sequence detected: NNNNNNNN	126,1
+Invalid DNA sequence detected: NNNNNNNN	126,1
+Invalid DNA sequence detected: NNNNNNNN	126,1
+Invalid DNA sequence detected: NNNNNNNN	126,1
+Invalid DNA sequence detected: NNNNNNNN	126,1
+Invalid DNA sequence detected: NNNNNNNN	126,1
+Invalid DNA sequence detected: NNNNNNNN	126,1
+Invalid DNA sequence detected: NNNNNNNN	127,1
+Invalid DNA sequence detected: NNNNNNNN	127,1
+Invalid DNA sequence detected: NNNNNNNN	127,1
+Invalid DNA sequence detected: NNNNNNNN	127,1
+Invalid DNA sequence detected: NNNNNNNN	127,1
+Invalid DNA sequence detected: NNNNNNNN	127,1
+Invalid DNA sequence detected: NNNNNNNN	127,1
+Invalid DNA sequence detected: NNNNNNNN	127,1
+Invalid DNA sequence detected: NNNNNNNN	128,1
+Invalid DNA sequence detected: NNNNNNNN	128,1
+Invalid DNA sequence detected: NNNNNNNN	128,1
+Invalid DNA sequence detected: NNNNNNNN	128,1
+Invalid DNA sequence detected: NNNNNNNN	128,1
+Invalid DNA sequence detected: NNNNNNNN	128,1
+Invalid DNA sequence detected: NNNNNNNN	128,1
+Invalid DNA sequence detected: NNNNNNNN	128,1
+Invalid DNA sequence detected: NNNNNNNN	129,1
+Invalid DNA sequence detected: NNNNNNNN	129,1
+Invalid DNA sequence detected: NNNNNNNN	129,1
+Invalid DNA sequence detected: NNNNNNNN	129,1
+Invalid DNA sequence detected: NNNNNNNN	129,1
+Invalid DNA sequence detected: NNNNNNNN	129,1
+Invalid DNA sequence detected: NNNNNNNN	129,1
+Invalid DNA sequence detected: NNNNNNNN	129,1
+Invalid DNA sequence detected: NNNNNNNN	130,1
+Invalid DNA sequence detected: NNNNNNNN	130,1
+Invalid DNA sequence detected: NNNNNNNN	130,1
+Invalid DNA sequence detected: NNNNNNNN	130,1
+Invalid DNA sequence detected: NNNNNNNN	130,1
+Invalid DNA sequence detected: NNNNNNNN	130,1
+Invalid DNA sequence detected: NNNNNNNN	130,1
+Invalid DNA sequence detected: NNNNNNNN	130,1
+Invalid DNA sequence detected: NNNNNNNN	131,1
+Invalid DNA sequence detected: NNNNNNNN	131,1
+Invalid DNA sequence detected: NNNNNNNN	131,1
+Invalid DNA sequence detected: NNNNNNNN	131,1
+Invalid DNA sequence detected: NNNNNNNN	131,1
+Invalid DNA sequence detected: NNNNNNNN	131,1
+Invalid DNA sequence detected: NNNNNNNN	131,1
+Invalid DNA sequence detected: NNNNNNNN	131,1
+Invalid DNA sequence detected: NNNNNNNN	132,1
+Invalid DNA sequence detected: NNNNNNNN	132,1
+Invalid DNA sequence detected: NNNNNNNN	132,1
+Invalid DNA sequence detected: NNNNNNNN	132,1
+Invalid DNA sequence detected: NNNNNNNN	132,1
+Invalid DNA sequence detected: NNNNNNNN	132,1
+Invalid DNA sequence detected: NNNNNNNN	132,1
+Invalid DNA sequence detected: NNNNNNNN	132,1
+Invalid DNA sequence detected: NNNNNNNN	133,1
+Invalid DNA sequence detected: NNNNNNNN	133,1
+Invalid DNA sequence detected: NNNNNNNN	133,1
+Invalid DNA sequence detected: NNNNNNNN	133,1
+Invalid DNA sequence detected: NNNNNNNN	133,1
+Invalid DNA sequence detected: NNNNNNNN	133,1
+Invalid DNA sequence detected: NNNNNNNN	133,1
+Invalid DNA sequence detected: NNNNNNNN	133,1
+Invalid DNA sequence detected: NNNNNNNN	134,1
+Invalid DNA sequence detected: NNNNNNNN	134,1
+Invalid DNA sequence detected: NNNNNNNN	134,1
+Invalid DNA sequence detected: NNNNNNNN	134,1
+Invalid DNA sequence detected: NNNNNNNN	134,1
+Invalid DNA sequence detected: NNNNNNNN	134,1
+Invalid DNA sequence detected: NNNNNNNN	134,1
+Invalid DNA sequence detected: NNNNNNNN	134,1
+Invalid DNA sequence detected: NNNNNNNN	135,1
+Invalid DNA sequence detected: NNNNNNNN	135,1
+Invalid DNA sequence detected: NNNNNNNN	135,1
+Invalid DNA sequence detected: NNNNNNNN	135,1
+Invalid DNA sequence detected: NNNNNNNN	135,1
+Invalid DNA sequence detected: NNNNNNNN	135,1
+Invalid DNA sequence detected: NNNNNNNN	135,1
+Invalid DNA sequence detected: NNNNNNNN	135,1
+Invalid DNA sequence detected: NNNNNNNN	136,1
+Invalid DNA sequence detected: NNNNNNNN	136,1
+Invalid DNA sequence detected: NNNNNNNN	136,1
+Invalid DNA sequence detected: NNNNNNNN	136,1
+Invalid DNA sequence detected: NNNNNNNN	136,1
+Invalid DNA sequence detected: NNNNNNNN	136,1
+Invalid DNA sequence detected: NNNNNNNN	136,1
+Invalid DNA sequence detected: NNNNNNNN	136,1
+Invalid DNA sequence detected: NNNNNNNN	137,1
+Invalid DNA sequence detected: NNNNNNNN	137,1
+Invalid DNA sequence detected: NNNNNNNN	137,1
+Invalid DNA sequence detected: NNNNNNNN	137,1
+Invalid DNA sequence detected: NNNNNNNN	137,1
+Invalid DNA sequence detected: NNNNNNNN	137,1
+Invalid DNA sequence detected: NNNNNNNN	137,1
+Invalid DNA sequence detected: NNNNNNNN	137,1
+Invalid DNA sequence detected: NNNNNNNN	138,1
+Invalid DNA sequence detected: NNNNNNNN	138,1
+Invalid DNA sequence detected: NNNNNNNN	138,1
+Invalid DNA sequence detected: NNNNNNNN	138,1
+Invalid DNA sequence detected: NNNNNNNN	138,1
+Invalid DNA sequence detected: NNNNNNNN	138,1
+Invalid DNA sequence detected: NNNNNNNN	138,1
+Invalid DNA sequence detected: NNNNNNNN	138,1
+Invalid DNA sequence detected: NNNNNNNN	139,1
+Invalid DNA sequence detected: NNNNNNNN	139,1
+Invalid DNA sequence detected: NNNNNNNN	139,1
+Invalid DNA sequence detected: NNNNNNNN	139,1
+Invalid DNA sequence detected: NNNNNNNN	139,1
+Invalid DNA sequence detected: NNNNNNNN	139,1
+Invalid DNA sequence detected: NNNNNNNN	139,1
+Invalid DNA sequence detected: NNNNNNNN	139,1
+Invalid DNA sequence detected: NNNNNNNN	140,1
+Invalid DNA sequence detected: NNNNNNNN	140,1
+Invalid DNA sequence detected: NNNNNNNN	140,1
+Invalid DNA sequence detected: NNNNNNNN	140,1
+Invalid DNA sequence detected: NNNNNNNN	140,1
+Invalid DNA sequence detected: NNNNNNNN	140,1
+Invalid DNA sequence detected: NNNNNNNN	140,1
+Invalid DNA sequence detected: NNNNNNNN	140,1
+Invalid DNA sequence detected: NNNNNNNN	141,1
+Invalid DNA sequence detected: NNNNNNNN	141,1
+Invalid DNA sequence detected: NNNNNNNN	141,1
+Invalid DNA sequence detected: NNNNNNNN	141,1
+Invalid DNA sequence detected: NNNNNNNN	141,1
+Invalid DNA sequence detected: NNNNNNNN	141,1
+Invalid DNA sequence detected: NNNNNNNN	141,1
+Invalid DNA sequence detected: NNNNNNNN	141,1
+Invalid DNA sequence detected: NNNNNNNN	142,1
+Invalid DNA sequence detected: NNNNNNNN	142,1
+Invalid DNA sequence detected: NNNNNNNN	142,1
+Invalid DNA sequence detected: NNNNNNNN	142,1
+Invalid DNA sequence detected: NNNNNNNN	142,1
+Invalid DNA sequence detected: NNNNNNNN	142,1
+Invalid DNA sequence detected: NNNNNNNN	142,1
+Invalid DNA sequence detected: NNNNNNNN	142,1
+Invalid DNA sequence detected: NNNNNNNN	143,1
+Invalid DNA sequence detected: NNNNNNNN	143,1
+Invalid DNA sequence detected: NNNNNNNN	143,1
+Invalid DNA sequence detected: NNNNNNNN	143,1
+Invalid DNA sequence detected: NNNNNNNN	143,1
+Invalid DNA sequence detected: NNNNNNNN	143,1
+Invalid DNA sequence detected: NNNNNNNN	143,1
+Invalid DNA sequence detected: NNNNNNNN	143,1
+Duplicate barcode NNNNNNNN found.	1,1
+Duplicate barcode NNNNNNNN found.	2,1
+Duplicate barcode NNNNNNNN found.	3,1
+Duplicate barcode NNNNNNNN found.	4,1
+Duplicate barcode NNNNNNNN found.	5,1
+Duplicate barcode NNNNNNNN found.	6,1
+Duplicate barcode NNNNNNNN found.	7,1
+Duplicate barcode NNNNNNNN found.	8,1
+Duplicate barcode NNNNNNNN found.	9,1
+Duplicate barcode NNNNNNNN found.	10,1
+Duplicate barcode NNNNNNNN found.	11,1
+Duplicate barcode NNNNNNNN found.	12,1
+Duplicate barcode NNNNNNNN found.	13,1
+Duplicate barcode NNNNNNNN found.	14,1
+Duplicate barcode NNNNNNNN found.	15,1
+Duplicate barcode NNNNNNNN found.	16,1
+Duplicate barcode NNNNNNNN found.	17,1
+Duplicate barcode NNNNNNNN found.	18,1
+Duplicate barcode NNNNNNNN found.	19,1
+Duplicate barcode NNNNNNNN found.	20,1
+Duplicate barcode NNNNNNNN found.	21,1
+Duplicate barcode NNNNNNNN found.	22,1
+Duplicate barcode NNNNNNNN found.	23,1
+Duplicate barcode NNNNNNNN found.	24,1
+Duplicate barcode NNNNNNNN found.	25,1
+Duplicate barcode NNNNNNNN found.	26,1
+Duplicate barcode NNNNNNNN found.	27,1
+Duplicate barcode NNNNNNNN found.	28,1
+Duplicate barcode NNNNNNNN found.	29,1
+Duplicate barcode NNNNNNNN found.	30,1
+Duplicate barcode NNNNNNNN found.	31,1
+Duplicate barcode NNNNNNNN found.	32,1
+Duplicate barcode NNNNNNNN found.	33,1
+Duplicate barcode NNNNNNNN found.	34,1
+Duplicate barcode NNNNNNNN found.	35,1
+Duplicate barcode NNNNNNNN found.	36,1
+Duplicate barcode NNNNNNNN found.	37,1
+Duplicate barcode NNNNNNNN found.	38,1
+Duplicate barcode NNNNNNNN found.	39,1
+Duplicate barcode NNNNNNNN found.	40,1
+Duplicate barcode NNNNNNNN found.	41,1
+Duplicate barcode NNNNNNNN found.	42,1
+Duplicate barcode NNNNNNNN found.	43,1
+Duplicate barcode NNNNNNNN found.	44,1
+Duplicate barcode NNNNNNNN found.	45,1
+Duplicate barcode NNNNNNNN found.	46,1
+Duplicate barcode NNNNNNNN found.	47,1
+Duplicate barcode NNNNNNNN found.	48,1
+Duplicate barcode NNNNNNNN found.	49,1
+Duplicate barcode NNNNNNNN found.	50,1
+Duplicate barcode NNNNNNNN found.	51,1
+Duplicate barcode NNNNNNNN found.	52,1
+Duplicate barcode NNNNNNNN found.	53,1
+Duplicate barcode NNNNNNNN found.	54,1
+Duplicate barcode NNNNNNNN found.	55,1
+Duplicate barcode NNNNNNNN found.	56,1
+Duplicate barcode NNNNNNNN found.	57,1
+Duplicate barcode NNNNNNNN found.	58,1
+Duplicate barcode NNNNNNNN found.	59,1
+Duplicate barcode NNNNNNNN found.	60,1
+Duplicate barcode NNNNNNNN found.	61,1
+Duplicate barcode NNNNNNNN found.	62,1
+Duplicate barcode NNNNNNNN found.	63,1
+Duplicate barcode NNNNNNNN found.	64,1
+Duplicate barcode NNNNNNNN found.	65,1
+Duplicate barcode NNNNNNNN found.	66,1
+Duplicate barcode NNNNNNNN found.	67,1
+Duplicate barcode NNNNNNNN found.	68,1
+Duplicate barcode NNNNNNNN found.	69,1
+Duplicate barcode NNNNNNNN found.	70,1
+Duplicate barcode NNNNNNNN found.	71,1
+Duplicate barcode NNNNNNNN found.	72,1
+Duplicate barcode NNNNNNNN found.	73,1
+Duplicate barcode NNNNNNNN found.	74,1
+Duplicate barcode NNNNNNNN found.	75,1
+Duplicate barcode NNNNNNNN found.	76,1
+Duplicate barcode NNNNNNNN found.	77,1
+Duplicate barcode NNNNNNNN found.	78,1
+Duplicate barcode NNNNNNNN found.	79,1
+Duplicate barcode NNNNNNNN found.	80,1
+Duplicate barcode NNNNNNNN found.	81,1
+Duplicate barcode NNNNNNNN found.	82,1
+Duplicate barcode NNNNNNNN found.	83,1
+Duplicate barcode NNNNNNNN found.	84,1
+Duplicate barcode NNNNNNNN found.	85,1
+Duplicate barcode NNNNNNNN found.	86,1
+Duplicate barcode NNNNNNNN found.	87,1
+Duplicate barcode NNNNNNNN found.	88,1
+Duplicate barcode NNNNNNNN found.	89,1
+Duplicate barcode NNNNNNNN found.	90,1
+Duplicate barcode NNNNNNNN found.	91,1
+Duplicate barcode NNNNNNNN found.	92,1
+Duplicate barcode NNNNNNNN found.	93,1
+Duplicate barcode NNNNNNNN found.	94,1
+Duplicate barcode NNNNNNNN found.	95,1
+Duplicate barcode NNNNNNNN found.	96,1
+Duplicate barcode NNNNNNNN found.	97,1
+Duplicate barcode NNNNNNNN found.	98,1
+Duplicate barcode NNNNNNNN found.	99,1
+Duplicate barcode NNNNNNNN found.	100,1
+Duplicate barcode NNNNNNNN found.	101,1
+Duplicate barcode NNNNNNNN found.	102,1
+Duplicate barcode NNNNNNNN found.	103,1
+Duplicate barcode NNNNNNNN found.	104,1
+Duplicate barcode NNNNNNNN found.	105,1
+Duplicate barcode NNNNNNNN found.	106,1
+Duplicate barcode NNNNNNNN found.	107,1
+Duplicate barcode NNNNNNNN found.	108,1
+Duplicate barcode NNNNNNNN found.	109,1
+Duplicate barcode NNNNNNNN found.	110,1
+Duplicate barcode NNNNNNNN found.	111,1
+Duplicate barcode NNNNNNNN found.	112,1
+Duplicate barcode NNNNNNNN found.	113,1
+Duplicate barcode NNNNNNNN found.	114,1
+Duplicate barcode NNNNNNNN found.	115,1
+Duplicate barcode NNNNNNNN found.	116,1
+Duplicate barcode NNNNNNNN found.	117,1
+Duplicate barcode NNNNNNNN found.	118,1
+Duplicate barcode NNNNNNNN found.	119,1
+Duplicate barcode NNNNNNNN found.	120,1
+Duplicate barcode NNNNNNNN found.	121,1
+Duplicate barcode NNNNNNNN found.	122,1
+Duplicate barcode NNNNNNNN found.	123,1
+Duplicate barcode NNNNNNNN found.	124,1
+Duplicate barcode NNNNNNNN found.	125,1
+Duplicate barcode NNNNNNNN found.	126,1
+Duplicate barcode NNNNNNNN found.	127,1
+Duplicate barcode NNNNNNNN found.	128,1
+Duplicate barcode NNNNNNNN found.	129,1
+Duplicate barcode NNNNNNNN found.	130,1
+Duplicate barcode NNNNNNNN found.	131,1
+Duplicate barcode NNNNNNNN found.	132,1
+Duplicate barcode NNNNNNNN found.	133,1
+Duplicate barcode NNNNNNNN found.	134,1
+Duplicate barcode NNNNNNNN found.	135,1
+Duplicate barcode NNNNNNNN found.	136,1
+Duplicate barcode NNNNNNNN found.	137,1
+Duplicate barcode NNNNNNNN found.	138,1
+Duplicate barcode NNNNNNNN found.	139,1
+Duplicate barcode NNNNNNNN found.	140,1
+Duplicate barcode NNNNNNNN found.	141,1
+Duplicate barcode NNNNNNNN found.	142,1
+Duplicate barcode NNNNNNNN found.	143,1
+Warnings ---------------------------

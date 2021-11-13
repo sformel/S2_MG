@@ -1,0 +1,479 @@
+---
+title: 'S2_MGF Figure 1: Map'
+author: "Stephen Formel"
+date: "10/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, out.width = "100%", out.height = "80%")
+```
+
+### Figure 1: Map of Oil Distribution
+
+Description:   Demonstrate distribution of PAHs at sites and time points.  
+
+
+_Note that winter = time point 1 and summer = time point 2.  This is leftover from earilier analyses.  I was asked to change these terms in the manuscript revisions, and I didn't have time to completely revise the scripts._
+
+Notes: 
+
+* My foundation came from this tutorial: http://zevross.com/blog/2014/07/16/mapping-in-r-using-the-ggplot2-package/
+* BJ is shorthand for Bay Jimmy site, F is shorthand for Fourchon site.
+* Publicly available shape files for marsh sites didn't capture the scale we needed for this map.  Shape files for sites were made by hand tracing sites in Google maps, exporting it as a KML file and importing that into ArcGIS to make a shape file.
+
+### Set up environment
+
+Load Libraries
+
+```{r, message = FALSE}
+
+library(rgdal)
+library(ggsn)
+library(cowplot)
+library(tidyverse)
+library(plyr)
+
+```
+
+Make colorblind-safe color palette
+
+```{r}
+
+cPAL <- c("#E69F00", "#0072B2")
+
+```
+
+1. Load and clean data
+```{r, message = FALSE, warning = FALSE}
+
+source("./S2_MGF_load_packages_and_clean_data.R")
+
+#This loads in way more objects than are needed for this script, but the above was a very handy script during data exploration and it never bogged my computer down to have all these objects loaded in at the beginning.
+```
+
+
+1. Extract oil data and omit any samples without oil data (NA)
+
+```{r}
+
+voi <- fung.2season_with_outliers
+
+df.env <- data.frame(sample_data(voi))
+
+#recode variables
+df.env$site <- plyr:::revalue(x = df.env$site, replace = c("BJ" = "Bay Jimmy", "F" = "Fourchon"))
+df.env$season <- plyr:::revalue(x = df.env$season, replace = c("WINTER" = "Time Point 1", "SUMMER" = "Time Point 2"))
+
+#clean and select variables of interest
+df.PAHs <- df.env %>%
+  select(SampleID,
+         site,
+         season,
+         Total.C1.C3.chrysenes,
+         Total.C1.C4.naphthalenes,
+         Total.C1.C3.dibenzothiophenes,
+         Total.C1.C4.phenanthrenes,
+         Total.relevant.PAHs,
+         Longitude,
+         Latitude) %>%
+  na.omit() %>% 
+  gather(key = "Class", 
+         value = "Abundance", 
+         Total.C1.C3.chrysenes:Total.C1.C4.phenanthrenes)
+
+df.PAHs.maps <- df.env %>%
+  select(SampleID,
+         site,
+         season,
+         Total.relevant.PAHs,
+         Longitude,
+         Latitude) %>%
+  na.omit() 
+
+```
+
+2. Make Bay Jimmy site map.
+
+```{r}
+
+#read in BJ shapefile
+BJ.shp <- readOGR("../data/GIS/BJ_site.shp")
+
+#check projection, should be WGS84
+proj4string(BJ.shp)
+
+# Next the shapefile has to be converted to a dataframe for use in ggplot2
+BJ.shp_df <- fortify(BJ.shp)
+
+#make our data object unique so we don't have to back transform it after this
+df.env.na.maps <- df.PAHs.maps
+
+#make it spatial points
+coordinates(df.env.na.maps) <- ~ Longitude + Latitude
+
+#we know that the coordinate system is WGS84 (google maps) so we can manually tell R what the coordinate system is
+proj4string(df.env.na.maps)<-CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
+
+#now we can use the spTransform function to project. We will project the mapdata and for coordinate reference system (CRS) we will assign the projection from counties
+
+df.env.na.maps<-spTransform(df.env.na.maps, CRS(proj4string(BJ.shp)))
+
+# double check that they match
+identical(proj4string(df.env.na.maps),proj4string(BJ.shp))
+
+# ggplot can't deal with a SpatialPointsDataFrame so we can convert back to a data.frame
+df.env.na.maps_df <- data.frame(df.env.na.maps)
+
+#subset for BJ
+df.env.na.maps_df.BJ <- df.env.na.maps_df[df.env.na.maps_df$site=="Bay Jimmy",]
+
+#Make plot
+
+map <- ggplot() +
+  geom_polygon(data = BJ.shp_df, 
+               aes(x = long, y = lat, group = group),
+               color = "black", 
+               fill = "lightgray", 
+               size = .2,
+               alpha = 0.3)
+
+map.styled <- map +
+  geom_point(data=df.env.na.maps_df.BJ, 
+             aes(x=Longitude, 
+                 y=Latitude, 
+                 size= sqrt(Total.relevant.PAHs), 
+                 fill = season), 
+             shape = 21, 
+             color = "black", 
+             position=position_jitter(width = 0.00004, height = 0.00004)) +
+  scale_size(range = c(rel(0), rel(10))) +
+  theme_void() +
+  scale_fill_manual(values = cPAL) +
+  theme(legend.position = "none")
+
+#Add north arrow and scale bar
+BJ.map.no.inset <- map.styled +
+  north(BJ.shp_df, 
+        location = "bottomleft", 
+        anchor = c(x = -89.8909, y = 29.443)) +
+  scalebar(BJ.shp_df, 
+           dist = 0.1, 
+           dist_unit = "km", 
+           transform = TRUE, 
+           model = 'WGS84', 
+           location = "bottomleft", 
+           st.size = 2.5, 
+           border.size = 0.1)
+
+#Add coordinates if desired
+#coord_cartesian(xlim = c(-89.8905, -89.88664), ylim = c(29.44503, 29.443))
+
+
+```
+
+3. Add inset of southern Louisiana
+
+```{r}
+
+#read in BJ shapefile
+LA.shp <- readOGR("../data/GIS/US_Census/states.shp")
+
+#now we can use the spTransform function to project. We will project the mapdata and for coordinate reference system (CRS) we will assign the projection from counties
+
+LA.shp.tran <-spTransform(LA.shp, CRS(proj4string(BJ.shp)))
+
+#subset to LA
+LA.shp.tran <- LA.shp.tran[LA.shp.tran$STATE_NAME=="Louisiana",]
+
+#check projection on our data
+proj4string(LA.shp.tran)
+
+# double check that they match
+identical(proj4string(LA.shp.tran),proj4string(BJ.shp))
+
+# Next the shapefile has to be converted to a dataframe for use in ggplot2
+LA.shp_df <- fortify(LA.shp.tran)
+
+#subset to southern LA
+LA.shp_df.south <- LA.shp_df[LA.shp_df$long>-91.88 & LA.shp_df$lat<31.03,]
+
+#add data point for New Orleans, Fourchon
+NOLA <- data.frame("Long" = c(-90, -90.14535), "Lat" = c(30, 29.13347))
+
+
+LA.inset <- ggplotGrob(ggplot() +
+                         geom_polygon(data=LA.shp_df.south, 
+                                      aes(x = long, y = lat, group = group), 
+                                      colour="grey10",fill="white", size = 0.2) +
+                         geom_point(data = df.env.na.maps_df.BJ, 
+                                    aes(x = Longitude[1], y = Latitude[1]), 
+                                    size = 1) +
+                         geom_text(data = df.env.na.maps_df.BJ, 
+                                   aes(x = Longitude[1], y = Latitude[1]), 
+                                   label = "Bay Jimmy", 
+                                   vjust = 0, 
+                                   hjust = 1, 
+                                   nudge_x = -0.05, 
+                                   nudge_y = 0.05, 
+                                   size = 4, 
+                                   check_overlap = TRUE) +
+                         geom_point(data = NOLA, 
+                                    aes(x = Long, y = Lat), 
+                                    size = 1) +
+                         geom_text(data = NOLA, 
+                                   aes(x = Long[1], y = Lat[1]), 
+                                   label = c("New Orleans"), 
+                                   vjust = 1, 
+                                   hjust = 1, 
+                                   nudge_x = -0.05, 
+                                   nudge_y = -0.00, 
+                                   size = 4) +
+                         geom_text(data = NOLA, 
+                                   aes(x = Long[2], y = Lat[2]), 
+                                   label = c("Fourchon"), 
+                                   vjust = 1, hjust = 1, 
+                                   nudge_x = -0.05, 
+                                   nudge_y = -0.05, 
+                                   size = 4) +
+                         theme_void() +
+                         theme(panel.background = element_rect(fill = "lightgray"), 
+                               panel.border = element_rect(color = "lightgray", fill = NA, size = 1)))
+
+```
+
+4. Put together Bay Jimmy site and Inset 
+
+```{r}
+
+#Bay Jimmy site map
+BJ.site <- BJ.map.no.inset +
+  annotation_custom(grob = LA.inset, xmin = -89.8852, xmax = -89.8878, ymin = 29.4440, ymax = 29.44575)
+
+```
+
+5. Make Fourchon site map
+
+```{r}
+
+#read in shapefile
+F.shp <- readOGR("../data/GIS/Fourchon_site.shp")
+
+# Next the shapefile has to be converted to a dataframe for use in ggplot2
+F.shp_df <- fortify(F.shp)
+F.shp_df.trans <- F.shp_df
+
+#subset to southern LA - these coordinates were fine tuned through trial and error
+F.shp_df <- F.shp_df.trans[F.shp_df.trans$long<(-90.1452) & F.shp_df.trans$lat<29.133538,]
+
+#make this object unique so we don't have to back transform it after this
+df.env.na.maps <- df.PAHs.maps
+
+#make it spatial points
+coordinates(df.env.na.maps) <- ~ Longitude + Latitude
+
+# we know that the coordinate system is WGS84 (google maps) so we can manually tell R what the coordinate system is
+proj4string(df.env.na.maps)<-CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
+
+# now we can use the spTransform function to project. We will project the mapdata and for coordinate reference system (CRS) we will assign the projection from counties
+df.env.na.maps<-spTransform(df.env.na.maps, CRS(proj4string(F.shp)))
+
+# double check that they match
+identical(proj4string(df.env.na.maps),proj4string(F.shp))
+
+# ggplot can't deal with a SpatialPointsDataFrame so we can convert back to a data.frame
+df.env.na.maps_df <- data.frame(df.env.na.maps)
+
+#subset for Fourchon
+df.env.na.maps_df.F <- df.env.na.maps_df[df.env.na.maps_df$site=="Fourchon",]
+
+#make Fourchon map
+map <- ggplot() +
+  geom_polygon(data = F.shp_df, 
+               aes(x = long, y = lat, group = group),
+               color = "black", 
+               fill = "lightgray", 
+               size = .2,
+               alpha = 0.3)
+
+#style map
+map.styled <- map +
+  geom_point(data=df.env.na.maps_df.F, 
+             aes(x=Longitude, y=Latitude, 
+                 size= sqrt(Total.relevant.PAHs), 
+                 fill = season), 
+             shape = 21, 
+             color = "black", 
+             position=position_jitter(width = 0.00002, height = 0.00002)) +
+  scale_size(range = c(rel(0), rel(10))) +
+  theme_void() + 
+  scale_fill_manual(values = cPAL) +
+  theme(legend.position = "none")
+
+#Add north arrow and scale bar
+
+F.map.no.inset <- map.styled +
+  north(F.shp_df, 
+        location = "bottomleft", 
+        anchor = c(x = -90.14567, y = 29.13329)) +
+  scalebar(F.shp_df, 
+           dist = 0.01, 
+           dist_unit = "km", 
+           transform = TRUE, 
+           model = 'WGS84', 
+           location = "bottomleft", 
+           st.size = 2.5, 
+           border.size = 0.1) 
+
+```
+
+
+6. Make strip plot of PAH classes for Bay Jimmy site
+
+```{r}
+
+#make BJ plot
+df.PAHs.plot.BJ <- ggplot(data = df.PAHs[df.PAHs$site=="Bay Jimmy",], 
+                          aes(x = Class, 
+                              y = Abundance, 
+                              color = season, 
+                              fill = season, 
+                              shape = site)) + 
+  geom_jitter(size = 4,
+              width = 0.2, 
+              stroke = 1, 
+              alpha = 3/5) +
+  scale_color_manual(values = c(rep("black", 4)), 
+                     name = "Season") +
+  scale_fill_manual(values = cPAL, 
+                    name = "Season") +
+  scale_shape_manual(values = c(21,24), 
+                     name = "Site") +
+  theme_classic() +
+  theme(panel.border = element_rect(color="black", fill=NA), 
+        axis.title.x = element_blank(), 
+        text=element_text(size=14), 
+        legend.position = "none", 
+        axis.text.x = element_blank(),
+        plot.title = element_text(hjust = 0.5)) +
+  labs(y = paste0("PAHs (", "\U03BC", "g/g)")) +
+  scale_y_log10(labels = function(x) format(x, scientific = FALSE)) +
+  scale_x_discrete(labels = c("Total.C1.C3.chrysenes" = "C1-C3 chrysenes", 
+                              "Total.C1.C4.naphthalenes" =  "C1-C4 naphthalenes", 
+                              "Total.C1.C4.phenanthrenes" = "C1-C4 phenanthrenes", 
+                              "Total.C1.C3.dibenzothiophenes" = "C1-C3 dibenzothiophenes") ) +
+  ggtitle(" Bay Jimmy")
+
+```
+
+
+7. Get legend for final figure
+
+```{r}
+
+legend <- get_legend(ggplot(data = df.PAHs[df.PAHs$site=="Bay Jimmy",], 
+                            aes(x = Class, 
+                                y = Abundance, 
+                                color = season, 
+                                fill = season)) + 
+                       geom_jitter(size = 4,
+                                   width = 0.2, 
+                                   stroke = 1, 
+                                   alpha = 3/5, 
+                                   shape = 21) +
+                       scale_shape_manual(values= c(21, 21), 
+                                          name = "Time Point") +
+                       scale_color_manual(values = c(rep("black", 4)), 
+                                          name = "Time Point") +
+                       scale_fill_manual(values = cPAL, 
+                                         name = "Time Point") +
+                       theme(legend.position="bottom", 
+                             legend.direction="horizontal", 
+                             legend.justification="center"))
+
+```
+
+
+8. Make Fourchon site strip plot
+
+```{r}
+
+df.PAHs.plot.F <- ggplot(data = df.PAHs[df.PAHs$site=="Fourchon",], 
+                          aes(x = Class, 
+                              y = Abundance, 
+                              color = season, 
+                              fill = season, 
+                              shape = site)) + 
+  geom_jitter(size = 4,
+              width = 0.2, 
+              stroke = 1, 
+              alpha = 3/5) +
+  scale_color_manual(values = c(rep("black", 4)), 
+                     name = "Time Point") +
+  scale_fill_manual(values = cPAL, 
+                    name = "Time Point") +
+  scale_shape_manual(values = c(21,24), 
+                     name = "Site") +
+  theme_classic() +
+  theme(panel.border = element_rect(color="black", fill=NA), 
+        axis.title.x = element_blank(), 
+        text=element_text(size=14), 
+        legend.position = "none", 
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5)) +
+  labs(y = paste0("PAHs (", "\U03BC", "g/g)")) +
+  scale_y_log10(labels = function(x) format(x, scientific = FALSE)) +
+  scale_x_discrete(labels = c("Total.C1.C3.chrysenes" = "C1-C3 chrysenes", 
+                              "Total.C1.C4.naphthalenes" =  "C1-C4 naphthalenes", 
+                              "Total.C1.C4.phenanthrenes" = "C1-C4 phenanthrenes", 
+                              "Total.C1.C3.dibenzothiophenes" = "C1-C3 dibenzothiophenes") ) +
+  ggtitle("Fourchon")
+
+```
+
+9. Build final figure
+
+```{r}
+
+left <- plot_grid(df.PAHs.plot.BJ, 
+                  df.PAHs.plot.F, 
+                  legend, 
+                  nrow = 3, 
+                  rel_heights = c(0.6, 1, 0.1), 
+                  labels = c("a", "b"), 
+                  align = "V")
+
+right <- plot_grid(BJ.site, 
+                   F.map.no.inset, 
+                   nrow = 2, 
+                   labels = c("c", "d"))
+
+#final plot
+
+plot_grid(left, 
+          right, 
+          ncol = 2, 
+          rel_widths = c(1,0.75))
+```
+
+10. Save Final Plot at submission resolution.
+
+
+```{r}
+
+#For manuscript submission size must be 174 mm wide and no taller than 234 mm.
+
+# ggsave(filename = "./Figures/Fig1.tiff", 
+#        width = 250, 
+#        height = 200, 
+#        units = "mm", 
+#        dpi = 600)
+
+#Version for at 72 dpi
+# ggsave(filename = "./Figures/Fig1.tiff",
+#        width = 250,
+#        height = 200,
+#        units = "mm",
+#        dpi = 720)
+
+```

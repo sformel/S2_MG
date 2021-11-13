@@ -1,0 +1,492 @@
+---
+title: "S2_MGF Mantel Tests"
+author: "Stephen Formel"
+date: "11/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, out.width = "100%")
+```
+
+### S2_MGF Manuscript  Mantel Tests
+#by Steve Formel
+
+Description: Is there spatial autocorrelation with oil or community composition?
+
+_Note that winter = time point 1 and summer = time point 2.  This is leftover from earilier analyses.  I was asked to change these terms in the manuscript revisions, and I didn't have time to completely revise the scripts._
+
+### Load libraries
+
+```{r message = FALSE}
+
+library(tidyverse)
+library(vegan)
+library(ecodist)
+library(geosphere)
+library(compositions)
+
+```
+
+### Load and Clean data
+
+```{r}
+
+source("./S2_MGF_load_packages_and_clean_data.R")
+
+#Subset unfiltered
+
+fung.2season.BJ.summer.unfiltered <- fung.2season.not_filtered %>%
+  subset_samples( . , (site %in% c("BJ") & season %in% c("SUMMER"))) %>%
+  {prune_taxa(taxa_sums(.) > 0 , .)}
+
+fung.2season.BJ.winter.unfiltered <- fung.2season.not_filtered %>%
+  subset_samples( . , (site %in% c("BJ") & season %in% c("WINTER"))) %>%
+  {prune_taxa(taxa_sums(.) > 0 , .)}
+
+fung.2season.F.summer.unfiltered <- fung.2season.not_filtered %>%
+  subset_samples( . , (site %in% c("F") & season %in% c("SUMMER"))) %>%
+  {prune_taxa(taxa_sums(.) > 0 , .)}
+
+fung.2season.F.winter.unfiltered <- fung.2season.not_filtered %>%
+  subset_samples( . , (site %in% c("F") & season %in% c("WINTER"))) %>%
+  {prune_taxa(taxa_sums(.) > 0 , .)}
+
+
+#Get list of all fungal phyloseq objects
+varnames <- c("fung.2season.F.summer_with_outliers", 
+              "fung.2season.F.winter_with_outliers", 
+              "fung.2season.BJ.summer_with_outliers", 
+              "fung.2season.BJ.winter_with_outliers")
+
+varnames.filtered <- c("fung.2season.F.summer.unfiltered", 
+                       "fung.2season.F.winter.unfiltered", 
+                       "fung.2season.BJ.summer.unfiltered",
+                       "fung.2season.BJ.winter.unfiltered")
+
+#make empty matrix
+B <- matrix(ncol = 4, nrow = length(varnames))
+
+```
+
+### Mantel tests
+
+#### Bray-Curtis
+
+```{r}
+
+for (i in 1:length(varnames)) {
+  
+  voi <- get(varnames[i])
+  df <- t(data.frame(otu_table(voi)))
+  df <- data.frame(df)
+  
+  df.env.na <- voi %>%
+    sample_data() %>%
+    data.frame() %>%
+    select(SampleID,
+           site,
+           season,
+           Latitude,
+           Longitude) %>%
+    na.omit()
+  df.na <- df[df.env.na$SampleID,]
+  dist.df <- vegdist(df.na, method = "bray") 
+  
+  #make distance metric based on lat long
+  mtx <- as.matrix(data.frame(df.env.na$Longitude, df.env.na$Latitude))
+  
+  #create distance matrix
+  mat <- as.dist(distm(mtx, fun=distVincentyEllipsoid))
+  
+  #note that this is calling the eocdist version, not the vegan version
+  man.results <- mantel(dist.df ~ mat)    
+  man.results[7] <- ifelse(man.results[4] <= 0.05, "significant", "not signficant")
+  
+  B[i,] <- c("object_name" = varnames[i], man.results[c(1,4)], "result" = man.results[c(7)])
+}
+
+#add names and make into data frame
+colnames(B) <- c("object_name", "mantel.stat(r)", "p-value", "results")
+C <- as.data.frame(B) 
+
+#view results
+C[(C$results=="significant"),] 
+
+#sort by signficance
+C <- C[order(C$results=="significant", decreasing = TRUE),]
+
+```
+
+##### Print and save
+
+```{r}
+
+print(C, row.names = FALSE)
+
+#write.csv(x = C,file = "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_mantel_comm_comp_bray-curtis.csv", row.names = FALSE)
+
+```
+
+#### Jaccard Index
+
+```{r}
+
+for (i in 1:length(varnames)) {
+  
+  voi <- get(varnames[i])
+  df <- t(data.frame(otu_table(voi)))
+  df <- data.frame(df)
+  
+  df.env.na <- voi %>%
+    sample_data() %>%
+    data.frame() %>%
+    select(SampleID,
+           site,
+           season,
+           Latitude,
+           Longitude) %>%
+    na.omit()
+  df.na <- df[df.env.na$SampleID,]
+  dist.df <- vegdist(df.na, method = "jaccard", binary = TRUE) 
+  
+  #make distance metric based on lat long
+  mtx <- as.matrix(data.frame(df.env.na$Longitude, df.env.na$Latitude))
+  
+  #create distance matrix
+  mat <- as.dist(distm(mtx, fun=distVincentyEllipsoid))
+  
+  #note that this is calling the eocdist version, not the vegan version
+  man.results <- mantel(dist.df ~ mat)    
+  man.results[7] <- ifelse(man.results[4] <= 0.05, "significant", "not signficant")
+  
+  B[i,] <- c("object_name" = varnames[i], man.results[c(1,4)], "result" = man.results[c(7)])
+}
+
+#add names and make into data frame
+colnames(B) <- c("object_name", "mantel.stat(r)", "p-value", "results")
+C <- as.data.frame(B) 
+
+#view results
+C[(C$results=="significant"),] 
+
+#sort by signficance
+C <- C[order(C$results=="significant", decreasing = TRUE),]
+
+```
+
+##### Print and save
+
+```{r}
+
+print(C, row.names = FALSE)
+
+#write.csv(x = C,file = "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_mantel_comm_comp_jaccard.csv", row.names = FALSE)
+
+```
+
+#### Aitchison Distance
+
+```{r}
+
+for (i in 1:length(varnames)) {
+  
+  voi <- get(varnames[i])
+  df <- t(data.frame(otu_table(voi)))
+  df <- data.frame(df)
+  
+  df.env.na <- voi %>%
+    sample_data() %>%
+    data.frame() %>%
+    select(SampleID,
+           site,
+           season,
+           Latitude,
+           Longitude) %>%
+    na.omit()
+
+  df.na <- df[df.env.na$SampleID,]
+  
+  clr.df <- clr(df.na)
+  clr.df <- as.data.frame(clr.df)
+  
+  dist.df <- vegdist(clr.df, method = "euclidean") 
+  
+  #make distance metric based on lat long
+  mtx <- as.matrix(data.frame(df.env.na$Longitude, df.env.na$Latitude))
+  
+  #create distance matrix
+  mat <- as.dist(distm(mtx, fun=distVincentyEllipsoid))
+  
+  #note that this is calling the eocdist version, not the vegan version
+  man.results <- mantel(dist.df ~ mat)    
+  man.results[7] <- ifelse(man.results[4] <= 0.05, "significant", "not signficant")
+  
+  B[i,] <- c("object_name" = varnames[i], man.results[c(1,4)], "result" = man.results[c(7)])
+}
+
+#add names and make into data frame
+colnames(B) <- c("object_name", "mantel.stat(r)", "p-value", "results")
+C <- as.data.frame(B) 
+
+#view results
+C[(C$results=="significant"),] 
+
+#sort by signficance
+C <- C[order(C$results=="significant", decreasing = TRUE),]
+
+```
+
+##### Print and save
+
+```{r}
+
+print(C, row.names = FALSE)
+
+#write.csv(x = C,file = "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_mantel_comm_comp_aitchison.csv", row.names = FALSE)
+
+```
+
+### Spatial autocorrelation of PAHs
+
+I collapse PAHs into Aitchison distance, like I've done for other tests.
+
+```{r}
+
+#make empty matrix
+B <- matrix(ncol = 4, nrow = length(varnames))
+
+for (i in 1:length(varnames)) {
+  
+  voi <- get(varnames[i])
+  df.env.na <- data.frame(sample_data(voi)) %>%
+  select(SampleID,
+         site,
+         season,
+         Total.C1.C3.chrysenes,
+         Total.C1.C4.naphthalenes,
+         Total.C1.C4.phenanthrenes,
+         Total.C1.C3.dibenzothiophenes,
+         Latitude,
+         Longitude) %>%
+    na.omit()
+  
+  clr.PAH <- clr(na.omit(df.env.na[,c(4:7)]))
+  clr.PAH <- as.data.frame(clr.PAH)
+
+  dist.df <- vegdist(clr.PAH, method = "euclidean")
+  
+  #make distance metric based on lat long
+  mtx <- as.matrix(data.frame(df.env.na$Longitude, df.env.na$Latitude))
+  
+  # create distance matrix
+  mat <- as.dist(distm(mtx, fun=distVincentyEllipsoid))
+  
+  #note that this is calling the eocdist version, not the vegan version
+  man.results <- mantel(dist.df ~ mat)    
+
+    man.results[7] <- ifelse(man.results[4] <= 0.05, "significant", "not signficant")
+  
+  B[i,] <- c("object_name" = varnames[i], man.results[c(1,4)], "result" = man.results[c(7)])
+  
+}
+
+#add names and make into data frame
+colnames(B) <- c("object_name", "mantel.stat(r)", "p-value", "results")
+C <- as.data.frame(B) 
+
+#view results
+C[(C$results=="significant"),] 
+
+#sort by signficance
+C <- C[order(C$results=="significant", decreasing = TRUE),]
+
+```
+
+##### Print and save
+
+```{r}
+
+print(C, row.names = FALSE)
+
+#rite.csv(x = C,file = "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_mantel_oil.csv", row.names = FALSE)
+
+```
+
+## How does it look when rare taxa are filtered out?
+
+#### Bray-Curtis
+
+```{r}
+
+for (i in 1:length(varnames.filtered)) {
+  
+  voi <- get(varnames.filtered[i])
+  df <- t(data.frame(otu_table(voi)))
+  df <- data.frame(df)
+  
+  df.env.na <- voi %>%
+    sample_data() %>%
+    data.frame() %>%
+    select(SampleID,
+           site,
+           season,
+           Latitude,
+           Longitude) %>%
+    na.omit()
+  df.na <- df[df.env.na$SampleID,]
+  dist.df <- vegdist(df.na, method = "bray") 
+  
+  #make distance metric based on lat long
+  mtx <- as.matrix(data.frame(df.env.na$Longitude, df.env.na$Latitude))
+  
+  #create distance matrix
+  mat <- as.dist(distm(mtx, fun=distVincentyEllipsoid))
+  
+  #note that this is calling the eocdist version, not the vegan version
+  man.results <- mantel(dist.df ~ mat)    
+  man.results[7] <- ifelse(man.results[4] <= 0.05, "significant", "not signficant")
+  
+  B[i,] <- c("object_name" = varnames.filtered[i], man.results[c(1,4)], "result" = man.results[c(7)])
+}
+
+#add names and make into data frame
+colnames(B) <- c("object_name", "mantel.stat(r)", "p-value", "results")
+C <- as.data.frame(B) 
+
+#view results
+C[(C$results=="significant"),] 
+
+#sort by signficance
+C <- C[order(C$results=="significant", decreasing = TRUE),]
+
+```
+
+##### Print and save
+
+```{r}
+
+print(C, row.names = FALSE)
+
+#write.csv(x = C,file = "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_mantel_comm_comp_bray-curtis_filtered.csv", row.names = FALSE)
+
+```
+
+#### Jaccard Index
+
+```{r}
+
+for (i in 1:length(varnames.filtered)) {
+  
+  voi <- get(varnames.filtered[i])
+  df <- t(data.frame(otu_table(voi)))
+  df <- data.frame(df)
+  
+  df.env.na <- voi %>%
+    sample_data() %>%
+    data.frame() %>%
+    select(SampleID,
+           site,
+           season,
+           Latitude,
+           Longitude) %>%
+    na.omit()
+  df.na <- df[df.env.na$SampleID,]
+  dist.df <- vegdist(df.na, method = "jaccard", binary = TRUE) 
+  
+  #make distance metric based on lat long
+  mtx <- as.matrix(data.frame(df.env.na$Longitude, df.env.na$Latitude))
+  
+  #create distance matrix
+  mat <- as.dist(distm(mtx, fun=distVincentyEllipsoid))
+  
+  #note that this is calling the eocdist version, not the vegan version
+  man.results <- mantel(dist.df ~ mat)    
+  man.results[7] <- ifelse(man.results[4] <= 0.05, "significant", "not signficant")
+  
+  B[i,] <- c("object_name" = varnames.filtered[i], man.results[c(1,4)], "result" = man.results[c(7)])
+}
+
+#add names and make into data frame
+colnames(B) <- c("object_name", "mantel.stat(r)", "p-value", "results")
+C <- as.data.frame(B) 
+
+#view results
+C[(C$results=="significant"),] 
+
+#sort by signficance
+C <- C[order(C$results=="significant", decreasing = TRUE),]
+
+```
+
+##### Print and save
+
+```{r}
+
+print(C, row.names = FALSE)
+
+#write.csv(x = C,file = "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_mantel_comm_comp_jaccard_filtered.csv", row.names = FALSE)
+
+```
+
+#### Aitchison Distance
+
+```{r}
+
+for (i in 1:length(varnames.filtered)) {
+  
+  voi <- get(varnames.filtered[i])
+  df <- t(data.frame(otu_table(voi)))
+  df <- data.frame(df)
+  
+  df.env.na <- voi %>%
+    sample_data() %>%
+    data.frame() %>%
+    select(SampleID,
+           site,
+           season,
+           Latitude,
+           Longitude) %>%
+    na.omit()
+
+  df.na <- df[df.env.na$SampleID,]
+  
+  clr.df <- clr(df.na)
+  clr.df <- as.data.frame(clr.df)
+  
+  dist.df <- vegdist(clr.df, method = "euclidean") 
+  
+  #make distance metric based on lat long
+  mtx <- as.matrix(data.frame(df.env.na$Longitude, df.env.na$Latitude))
+  
+  #create distance matrix
+  mat <- as.dist(distm(mtx, fun=distVincentyEllipsoid))
+  
+  #note that this is calling the eocdist version, not the vegan version
+  man.results <- mantel(dist.df ~ mat)    
+  man.results[7] <- ifelse(man.results[4] <= 0.05, "significant", "not signficant")
+  
+  B[i,] <- c("object_name" = varnames.filtered[i], man.results[c(1,4)], "result" = man.results[c(7)])
+}
+
+#add names and make into data frame
+colnames(B) <- c("object_name", "mantel.stat(r)", "p-value", "results")
+C <- as.data.frame(B) 
+
+#view results
+C[(C$results=="significant"),] 
+
+#sort by signficance
+C <- C[order(C$results=="significant", decreasing = TRUE),]
+
+```
+
+##### Print and save
+
+```{r}
+
+print(C, row.names = FALSE)
+
+#write.csv(x = C,file = "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_mantel_comm_comp_aitchison_filtered.csv", row.names = FALSE)
+
+```

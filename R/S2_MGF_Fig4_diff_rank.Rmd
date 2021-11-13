@@ -1,0 +1,811 @@
+---
+title: 'S2_MGF Figure 4: Differential Rankings'
+author: "Stephen Formel"
+date: "11/11/2020"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, out.width = "100%")
+```
+
+### S2_MGF Manuscript  Figure 4 - Ranked Differential plots
+#by Steve Formel
+
+Description: I'm basically imitating the QURRO plots: https://www.biorxiv.org/content/10.1101/2019.12.17.880047v1.full
+
+_Note that winter = time point 1 and summer = time point 2.  This is leftover from earilier analyses.  I was asked to change these terms in the manuscript revisions, and I didn't have time to completely revise the scripts._
+
+
+### Load libraries
+
+```{r message = FALSE}
+
+library(tidyverse)
+library(ggforce)
+library(cowplot)
+library(ggrepel)
+library(grid)
+library(venn)
+library(ggplot2)
+library(ggpolypath)
+library(staplr)
+
+```
+
+### Load and Clean data
+
+```{r, message = FALSE}
+
+source("./S2_MGF_load_packages_and_clean_data.R")
+
+# Load Songbird output
+
+#If knit as a single Rmd
+sb <- read.delim("../data/songbird/site_timepoint/differentials.tsv")
+
+#For S2MGF_knit_all_figures.R
+sb <- read.delim("../data/songbird/site_timepoint/differentials.tsv")
+
+#rename columns
+names(sb) <- c("featureid", "Intercept", "Fourchon_rel_BJ", "TP2_rel_TP1")
+
+#Using not filtered because the biom used in songbird wasn't filtered this way 
+fung.2season.sub <- subset_taxa(fung.2season_with_outliers, rownames(tax_table(fung.2season_with_outliers)) %in% sb$featureid)
+ 
+sb.filtered <- sb[sb$featureid %in% rownames(tax_table(fung.2season_with_outliers_filtered)), ]
+
+#bind taxonomy with songbird results
+sb <- cbind(sb, tax_table(fung.2season.sub))
+
+#Factor for whether something is dominant or not
+
+sb$rare_dom <- factor(ifelse(sb$featureid %in% sb.filtered$featureid,
+                      "dominant",
+                      "rare"))
+
+#Replace NA with "unidentified"
+sb[,6:12] <- lapply(sb[,6:12], replace_na, replace = "unidentified")
+
+#rename in case I need to come back
+sb.mod <- sb
+
+#Add rank columns for x axis-----
+sb.mod$rank_site <- rank(sb.mod$Fourchon_rel_BJ)
+sb.mod$rank_season <- rank(sb.mod$TP2_rel_TP1)
+
+#Add percentile columns 
+sb.mod$percentile_site <- cut(sb.mod$rank_site , 
+                         breaks = quantile(sb.mod$rank_site, 
+                                           seq(from = 0, to = 1, by = 0.1)), 
+                         labels=1:10, 
+                         include.lowest=TRUE)
+
+sb.mod$percentile_season <- cut(sb.mod$rank_season , 
+                         breaks = quantile(sb.mod$rank_season, 
+                                           seq(from = 0, to = 1, by = 0.1)), 
+                         labels=1:10, 
+                         include.lowest=TRUE)
+
+```
+
+### Plot taxonomic ranks as pdf for browsing
+
+
+How many orders are there?
+```{r}
+
+length(unique(sb.mod$Class)) #11
+#If I divide by 4, I get 3 pages
+
+```
+
+Create annotations
+
+```{r}
+
+text_high_TP <- textGrob("Time Point 2", gp=gpar(fontsize=10, fontface="bold"), just = "center")
+text_low_TP <- textGrob("Time Point 1", gp=gpar(fontsize=10, fontface="bold"), just = "center")
+text_high_S <- textGrob("Fourchon", gp=gpar(fontsize=10, fontface="bold"), just = "center")
+text_low_S <- textGrob("Bay Jimmy", gp=gpar(fontsize=10, fontface="bold"), just = "center")
+
+
+```
+
+Make pdf.
+
+```{r, eval= FALSE}
+
+pdf("../../../../results/images/manuscript/S2_MGF_final/revised_figures/S2_MGF_online_resource_2_revised.pdf", paper = "letter")
+
+#print description
+
+txt <- "Online Resource 2 for : \nSpatial and temporal comparisons \nof salt marsh soil fungal communities \nfollowing the Deepwater Horizon spill \n\nAuthors: Stephen K. Formel, Kimberly L. Mighell, Demetra Kandalepas , \nElizabeth Jarrell, Brittany M. Bernik, Vijaikrishnah Elango, \nJohn H. Pardue, Michael J. Blum, and Sunshine A. Van Bael\n\n Description: Differential Rankings with regard to site or time point. \nDominant Taxa are represented by black bars, rare taxa by gray bars.  \nPlots are facetted by phylum and class.  \nOTUs in the extreme deciles are also labeled by genus.\n\nAnnotations on the x-axis represent the factor level (site or time point) \nthat is associated with the extreme decile on each end of the x-axis."
+
+grid.text(label = txt, draw = TRUE, hjust = 0.5)
+
+for (i in 1:3){
+
+#Time Point  
+    print(
+    ggplot(data = sb.mod,
+       aes(x = rank_season,
+           y = TP2_rel_TP1,
+           fill = rare_dom,
+           color = rare_dom)) +
+  geom_col(width = 1) +
+  theme_bw() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(vjust = 0)) +
+  scale_color_manual(values = c("black", "darkgray")) +
+  scale_fill_manual(values = c("black", "darkgrey")) +
+  geom_vline(aes(xintercept = min(sb.mod$rank_season[sb.mod$percentile_season==10])),
+             size = 0.5,
+             linetype=2) +
+  geom_vline(aes(xintercept = max(sb.mod$rank_season[sb.mod$percentile_season==1])),
+             size = 0.5,
+             linetype=2) +
+  scale_x_continuous(limits = c(0, max(sb.mod$rank_season)), expand = c(0, 0)) +
+  labs(y = "Differential by Time Point",
+       x = "Rank",
+       color = "Relative Abundance of Taxa",
+       fill = "Relative Abundance of Taxa") +
+  annotation_custom(text_low_TP, xmin = 20, xmax = 20, ymin = -10, ymax = -10) +
+  annotation_custom(text_high_TP, xmin = 90, xmax = 90, ymin = -10, ymax = -10) +
+  coord_cartesian(ylim=c(-8,3.5), clip="off") +
+  geom_label_repel(inherit.aes = FALSE,
+                  data = sb.mod %>%
+                    filter(percentile_season %in% c(1,10)),
+                  aes(x = rank_season,
+                      y = TP2_rel_TP1,
+                      label = Genus),
+                  nudge_x = 0.5,
+                  direction = "y",
+                  angle = 0,
+                  vjust = 0,
+                  hjust = 0,
+                  segment.size = 0.5) +
+         facet_wrap_paginate(~ Phylum*Class, ncol = 2, nrow = 2, page = i))
+  }  #end loop
+
+#Site
+
+for (i in 1:3){
+  
+  print(
+    ggplot(data = sb.mod,
+       aes(x = rank_site,
+           y = Fourchon_rel_BJ,
+           fill = rare_dom,
+           color = rare_dom)) +
+  geom_col(width = 1) +
+  theme_bw() +
+  theme(legend.position = "none",
+        axis.title.x = element_text(vjust = 0)) +
+  scale_color_manual(values = c("black", "darkgray")) +
+  scale_fill_manual(values = c("black", "darkgrey")) +
+  geom_vline(aes(xintercept = min(sb.mod$rank_site[sb.mod$percentile_site==10])),
+             size = 0.5,
+             linetype=2) +
+  geom_vline(aes(xintercept = max(sb.mod$rank_site[sb.mod$percentile_site==1])),
+             size = 0.5,
+             linetype=2) +
+  scale_x_continuous(limits = c(0, max(sb.mod$rank_site)), expand = c(0, 0)) +
+  labs(y = "Differential by Site",
+       x = "Rank",
+       color = "Relative Abundance of Taxa",
+       fill = "Relative Abundance of Taxa") +
+  annotation_custom(text_low_S, xmin = 20, xmax = 20, ymin = -10, ymax = -10) +
+  annotation_custom(text_high_S, xmin = 90, xmax = 90, ymin = -10, ymax = -10) +
+  coord_cartesian(ylim=c(-8,3.5), clip="off") +
+  geom_label_repel(inherit.aes = FALSE,
+                  data = sb.mod %>%
+                    filter(percentile_site %in% c(1,10)),
+                  aes(x = rank_site,
+                      y = Fourchon_rel_BJ,
+                      label = Genus),
+                  nudge_x = 0.5,
+                  direction = "y",
+                  angle = 0,
+                  vjust = 0,
+                  hjust = 0,
+                  segment.size = 0.5) +
+         facet_wrap_paginate(~ Phylum*Class, ncol = 2, nrow = 2, page = i))
+  }  #end loop
+
+
+dev.off()
+
+```
+
+
+
+From the above I think I should plot:
+
+- Dothideomycetes by site and season
+- Sordariomycetes by site
+- Agaricomycetes by season
+
+As a separate figure
+
+- Hydrocarbon degraders by site
+
+
+### Plot Dothideomycetes by season
+
+create annotations
+
+```{r}
+
+text_high <- textGrob("Time Point 2 \u2192", gp=gpar(fontsize=12, fontface="bold"), just = "center")
+text_low <- textGrob("\u2190 Time Point 1", gp=gpar(fontsize=12, fontface="bold"), just = "center")
+
+```
+
+plot
+
+```{r}
+
+doth.season <- ggplot(data = sb.mod %>%
+         filter(Class=="Dothideomycetes"),
+       aes(x = rank_season,
+           y = TP2_rel_TP1,
+           fill = rare_dom,
+           color = rare_dom)) +
+  geom_col(width = 1) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  scale_color_manual(values = c("black", "darkgray")) +
+  scale_fill_manual(values = c("black", "darkgray")) +
+  geom_vline(aes(xintercept = min(sb.mod$rank_season[sb.mod$percentile_season==10])),
+             size = 0.5,
+             linetype=2) +
+  geom_vline(aes(xintercept = max(sb.mod$rank_season[sb.mod$percentile_season==1])),
+             size = 0.5,
+             linetype=2) +
+  scale_x_continuous(limits = c(0, max(sb.mod$rank_season)), expand = c(0, 0)) +
+  labs(y = "Differential by Time Point",
+       x = "Rank",
+       title = "Dothideomycetes by Time Point",
+       color = "Relative Abundance of Taxa",
+       fill = "Relative Abundance of Taxa") +
+  annotation_custom(text_low, xmin = 20, xmax = 20, ymin = -9.5, ymax = -9.5) +
+  annotation_custom(text_high, xmin = 90, xmax = 90, ymin = -9.5, ymax = -9.5) +
+  coord_cartesian(ylim=c(-8,3.5), clip="off") +
+  geom_label_repel(inherit.aes = FALSE,
+                  data = sb.mod %>%
+                    filter(Class=="Dothideomycetes" & percentile_season %in% c(1,10)),
+                  aes(x = rank_season,
+                      y = TP2_rel_TP1,
+                      label = Genus),
+                  nudge_x = 0.5,
+                  direction = "y",
+                  angle = 0,
+                  vjust = 0,
+                  hjust = 0,
+                  segment.size = 0.5)
+
+```
+
+### Dothideomycetes by site
+
+create annotations
+
+```{r}
+
+text_high <- textGrob("Fourchon \u2192", gp=gpar(fontsize=12, fontface="bold"), just = "center")
+text_low <- textGrob("\u2190 Bay Jimmy", gp=gpar(fontsize=12, fontface="bold"), just = "center")
+
+```
+
+plot
+
+```{r}
+
+doth.site <- ggplot(data = sb.mod %>%
+         filter(Class=="Dothideomycetes"),
+       aes(x = rank_site,
+           y = Fourchon_rel_BJ,
+           fill = rare_dom,
+           color = rare_dom)) +
+  geom_col(width = 1) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  scale_color_manual(values = c("black", "darkgray")) +
+  scale_fill_manual(values = c("black", "darkgray")) +
+  geom_vline(aes(xintercept = min(sb.mod$rank_site[sb.mod$percentile_site==10])),
+             size = 0.5,
+             linetype=2) +
+  geom_vline(aes(xintercept = max(sb.mod$rank_site[sb.mod$percentile_site==1])),
+             size = 0.5,
+             linetype=2) +
+  scale_x_continuous(limits = c(0, max(sb.mod$rank_site)), expand = c(0, 0)) +
+  labs(y = "Differential by Site",
+       x = "Rank",
+       title = "Dothideomycetes by Site",
+       color = "Relative Abundance of Taxa",
+       fill = "Relative Abundance of Taxa") +
+  annotation_custom(text_low, xmin = 20, xmax = 20, ymin = -9.5, ymax = -9.5) +
+  annotation_custom(text_high, xmin = 90, xmax = 90, ymin = -9.5, ymax = -9.5) +
+  coord_cartesian(ylim=c(-8,3.5), clip="off") +
+  geom_label_repel(inherit.aes = FALSE,
+                  data = sb.mod %>%
+                    filter(Class=="Dothideomycetes" & percentile_site %in% c(1,10)),
+                  aes(x = rank_site,
+                      y = Fourchon_rel_BJ,
+                      label = Genus),
+                  nudge_x = 0.5,
+                  direction = "y",
+                  angle = 0,
+                  vjust = 0,
+                  hjust = 0,
+                  segment.size = 0.5)
+
+```
+
+
+plot all top of figure
+
+```{r}
+
+doth.all <- plot_grid(doth.site, doth.season)
+
+```
+
+
+### Agaricomycetes by season
+
+create annotations
+
+```{r}
+
+text_high <- textGrob("Time Point 2 \u2192", gp=gpar(fontsize=12, fontface="bold"), just = "center")
+text_low <- textGrob("\u2190 Time Point 1", gp=gpar(fontsize=12, fontface="bold"), just = "center")
+
+```
+
+plot
+
+```{r}
+
+agarico <- ggplot(data = sb.mod %>%
+         filter(Class=="Agaricomycetes"),
+       aes(x = rank_season,
+           y = TP2_rel_TP1,
+           fill = rare_dom,
+           color = rare_dom)) +
+  geom_col(width = 1) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  scale_color_manual(values = c("black", "darkgray")) +
+  scale_fill_manual(values = c("black", "darkgray")) +
+  geom_vline(aes(xintercept = min(sb.mod$rank_season[sb.mod$percentile_season==10])),
+             size = 0.5,
+             linetype=2) +
+  geom_vline(aes(xintercept = max(sb.mod$rank_season[sb.mod$percentile_season==1])),
+             size = 0.5,
+             linetype=2) +
+  scale_x_continuous(limits = c(0, max(sb.mod$rank_season)), expand = c(0, 0)) +
+  labs(y = "Differential by Time Point",
+       x = "Rank",
+       title = "Agaricomycetes",
+       color = "Relative Abundance of Taxa",
+       fill = "Relative Abundance of Taxa") +
+  annotation_custom(text_low, xmin = 20, xmax = 20, ymin = -9.5, ymax = -9.5) +
+  annotation_custom(text_high, xmin = 90, xmax = 90, ymin = -9.5, ymax = -9.5) +
+  coord_cartesian(ylim=c(-8,3.5), clip="off") +
+  geom_label_repel(inherit.aes = FALSE,
+                  data = sb.mod %>%
+                    filter(Class=="Agaricomycetes" & percentile_season %in% c(1,10)),
+                  aes(x = rank_season,
+                      y = TP2_rel_TP1,
+                      label = Genus),
+                  nudge_x = 0.5,
+                  direction = "y",
+                  angle = 0,
+                  vjust = 0,
+                  hjust = 0,
+                  segment.size = 0.5)
+
+```
+
+### Sordariomycetes by site
+
+create annotations
+
+```{r}
+
+text_high <- textGrob("Fourchon \u2192", gp=gpar(fontsize=12, fontface="bold"), just = "center")
+text_low <- textGrob("\u2190 Bay Jimmy", gp=gpar(fontsize=12, fontface="bold"), just = "center")
+
+```
+
+plot
+
+```{r}
+
+sordario <- ggplot(data = sb.mod %>%
+         filter(Class=="Sordariomycetes"),
+       aes(x = rank_site,
+           y = Fourchon_rel_BJ,
+           fill = rare_dom,
+           color = rare_dom)) +
+  geom_col(width = 1) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  scale_color_manual(values = c("black", "darkgray")) +
+  scale_fill_manual(values = c("black", "darkgray")) +
+  geom_vline(aes(xintercept = min(sb.mod$rank_site[sb.mod$percentile_site==10])),
+             size = 0.5,
+             linetype=2) +
+  geom_vline(aes(xintercept = max(sb.mod$rank_site[sb.mod$percentile_site==1])),
+             size = 0.5,
+             linetype=2) +
+  scale_x_continuous(limits = c(0, max(sb.mod$rank_site)), expand = c(0, 0)) +
+  labs(y = "Differential by Site",
+       x = "Rank",
+       title = "Sordariomycetes",
+       color = "Relative Abundance of Taxa",
+       fill = "Relative Abundance of Taxa") +
+  annotation_custom(text_low, xmin = 20, xmax = 20, ymin = -9.5, ymax = -9.5) +
+  annotation_custom(text_high, xmin = 90, xmax = 90, ymin = -9.5, ymax = -9.5) +
+  coord_cartesian(ylim=c(-8,3.5), clip="off") +
+  geom_label_repel(inherit.aes = FALSE,
+                  data = sb.mod %>%
+                    filter(Class=="Sordariomycetes" & percentile_site %in% c(1,10)),
+                  aes(x = rank_site,
+                      y = Fourchon_rel_BJ,
+                      label = Genus),
+                  nudge_x = 0.5,
+                  direction = "y",
+                  angle = 0,
+                  vjust = 0,
+                  hjust = 0,
+                  segment.size = 0.5)
+
+```
+
+### Plot and save figure 4
+
+```{r}
+
+plot_grid(doth.site + labs(title = NULL,subtitle = "Dothideomycetes"), doth.season + labs(title = NULL,subtitle = "Dothideomycetes"), sordario + labs(title = NULL,subtitle = "Sordariomycetes"), agarico + labs(title = NULL,subtitle = "Agaricomycetes"), labels = c("a", "b", "c", "d"))
+
+#ggsave("../../../../results/images/manuscript/S2_MGF_final/S2_MGF_Fig4.png", width = 10, height = 8, units = "in")
+
+#For manuscript submission
+
+# ggsave("../../../../results/images/manuscript/S2_MGF_final/revised_figures/Fig4_revised.tiff", 
+#        width = 250, 
+#        height = 200, 
+#        units = "mm",
+#        dpi = 600)
+
+```
+
+### Venn Diagram
+
+Plot and save. To help me visualize taxa overlap.
+
+```{r}
+
+sb.mod.dom <- sb.mod %>%
+  filter(rare_dom=="dominant")
+
+#Site and Season extremes
+venn.list <- list('Heavily Oiled' = sb.mod.dom$featureid[sb.mod.dom$percentile_site==1],
+                  TP1 = sb.mod.dom$featureid[sb.mod.dom$percentile_season==1],
+                  TP2 = sb.mod.dom$featureid[sb.mod.dom$percentile_season==10],
+                  'Lightly Oiled' = sb.mod.dom$featureid[sb.mod.dom$percentile_site==10])
+
+venn(venn.list, box = FALSE, ggplot = TRUE, ellipse = TRUE, )
+
+#ggsave("../../../../results/images/manuscript/S2_MG_fungi_venn.png", width = 5, height = 5, units = "in")
+
+lapply(venn.list, length)
+
+```
+
+
+### Make Table of Extremely Ranked Taxa
+
+```{r}
+
+x.tax <- plyr:::ldply(venn.list, data.frame)
+
+x.taxon <- sb.mod[match(x.tax$X..i.., sb.mod$featureid),] %>%
+  select(Phylum, Class, Order, Family, Genus, Species)
+
+x.all <- cbind(x.tax, x.taxon)
+
+names(x.all) <- c("Associate", "OTU id", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+
+#They match, but a .1 was added to duplicates
+x.all$X..i..[which(x.all$X..i..!=rownames(x.taxon))]
+rownames(x.taxon)[which(x.all$X..i..!=rownames(x.taxon))]
+
+#write.csv(x.all, "../../../../results/images/manuscript/S2_MGF_final/S2_MGF_extreme_ranks.table.csv", row.names = FALSE)
+
+```
+
+### Overview of Taxa by % OTUs
+
+```{r}
+
+sb.mod %>%
+  group_by(Phylum) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+```
+
+### Percent by reads
+
+```{r}
+
+fid <- prune_taxa(sb.mod$featureid, fung.2season_with_outliers) 
+sb.mod$tax.sums <- fid %>%
+  taxa_sums() 
+
+sb.mod %>%
+  group_by(Phylum) %>%
+  dplyr::summarise (n = sum(tax.sums)) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+```
+
+### Taxa that are positively associated with Heavily Oiled site
+
+
+```{r}
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1) %>%
+  group_by(Phylum) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1) %>%
+  group_by(Phylum, Class) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq)) %>%
+  print.data.frame()
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1) %>%
+  group_by(Family) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq)) %>%
+  print.data.frame()
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1) %>%
+  group_by(Family, Genus) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq)) %>%
+  print.data.frame()
+```
+
+
+### Taxa that are positively associated with Heavily Oiled site and Time Point 2
+
+```{r}
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1 &
+           percentile_season==10) %>%
+  group_by(Phylum) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1 &
+           percentile_season==10) %>%
+  group_by(Phylum, Class) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1 &
+           percentile_season==10) %>%
+  group_by(Family) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1 &
+           percentile_season==10) %>%
+  group_by(Family, Genus) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+```
+
+### Taxa that are positively associated with Heavily Oiled site and Time Point 1
+
+```{r}
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1 &
+           percentile_season==1) %>%
+  group_by(Phylum) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1 &
+           percentile_season==1) %>%
+  group_by(Phylum, Class) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1 &
+           percentile_season==1) %>%
+  group_by(Family) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==1 &
+           percentile_season==1) %>%
+  group_by(Class,Family, Genus) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+```
+
+### Taxa that are positively associated with Lightly Oiled site
+
+```{r}
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10) %>%
+  group_by(Phylum) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10) %>%
+  group_by(Phylum, Class) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq)) %>%
+  print.data.frame()
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10) %>%
+  group_by(Family) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq)) %>%
+  print.data.frame()
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10) %>%
+  group_by(Genus) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq)) %>%
+  print.data.frame()
+
+```
+
+
+### Taxa that are positively associated with Lightly Oiled site and Time Point 2
+
+```{r}
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10 &
+           percentile_season==10) %>%
+  group_by(Phylum) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10 &
+           percentile_season==10) %>%
+  group_by(Phylum, Class) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10 &
+           percentile_season==10) %>%
+  group_by(Family) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10 &
+           percentile_season==10) %>%
+  group_by(Family, Genus) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+```
+
+### Taxa that are positively associated with Lightly Oiled site and Time point 1
+
+```{r}
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10 &
+           percentile_season==1) %>%
+  group_by(Phylum) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10 &
+           percentile_season==1) %>%
+  group_by(Phylum, Class) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10 &
+           percentile_season==1) %>%
+  group_by(Family) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+
+sb.mod %>%
+  filter(rare_dom=="dominant" &
+           percentile_site==10 &
+           percentile_season==1) %>%
+  group_by(Class,Family, Genus) %>%
+  dplyr::summarise (n = n()) %>%
+  mutate(freq = n / sum(n)) %>%
+  arrange(desc(freq))
+  
+```
+  

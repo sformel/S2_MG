@@ -1,0 +1,717 @@
+#Script for S2 on 20 July 2017
+changed seq filenames using the unix command "rename" to read S2.1_R1.fastq instead of 1.R1.fastq.  Also changed the several sequences with longer names (named differently by the sequencing company for no apparent reason) to follow this convention.
+#Using Candice's friend's program called FAST, I generated a mapping file for R1 and R2
+fast.py -generate_mapping -i ./R1 -o read1_map.txt
+fast.py -generate_mapping -i ./R2 -o read2_map.txt
+#add sample labels to all sequences
+fast.py -add_labels -m read1_map.txt -i ./R1 -o read1_labeled -t 4
+fast.py -add_labels -m read2_map.txt -i ./R2 -o read2_labeled -t 4
+	#output file is labeled "labeled_S2.1_R1.fastq" 
+#merge all labeled seqs - this is a very slow way of doing it.
+fast.py -merge_seqs -i read1_labeled -o S2_R1_merged.fastq
+fast.py -merge_seqs -i read2_labeled -o S2_R2_merged.fastq
+#trim primers and filter short reads - then use sickle
+#nice tutorial: http://www.ark-genomics.org/events-online-training-eu-training-course/adapter-and-quality-trimming-illumina-data
+
+#from this discussion, might be true: http://seqanswers.com/forums/showthread.php?t=17939
+Illumina 5' end sequencing cycle starts right from the start (5' end) of the actual sequence. So adapters sequence contamination in the final read would be only on 3' end.
+#also: http://onetipperday.sterding.com/2012/08/three-ways-to-trim-adaptorprimer.html
+#explains how to trim "linked" primers with cutadapt
+https://github.com/marcelm/cutadapt/issues/237
+#the second and fourth primers are the reverse complement of the primers in primers.csv  In theory the seq is only trimmed if it occurs with the first primer.  If left untrimmed, it is discarded.
+
+#to load cutadapt:
+
+	module load anaconda
+	export CONDA_ENVS_PATH=/lustre/project/svanbael/steve/software/conda-env
+source activate software
+
+cutadapt -a AYTGGGYDTAAAGNG...GGATTAGATACCCBNGTA -a ACCTGCGGARGGATCA...AACTTTYARCAAYGGATCTC -A TACNVGGGTATCTAATCC...CNCTTTAHRCCCART -A GAGATCCRTTGYTRAAAGTT...TGATCCYTCCGCAGGT --discard-untrimmed --match-read-wildcards  -e 0.1 -O 5 -m 50 -o S2_R1_merged.cut.fastq -p S2_R2_merged.cut.fastq S2_R1_merged.fastq S2_R2_merged.fastq > report.txt 
+
+#I want to compare to ATGC results
+
+	#count number of seqs in labeled fastq files
+
+		 awk '{s++}END{print s/4}' S2_R1_merged.fastq
+			
+			#69,348,965 sequences from 143 fastq files
+ 
+		 awk '{s++}END{print s/4}' S2_R2_merged.fastq
+
+			#69,348,965 sequences from 143 files
+
+#each file
+
+	for file in *.fastq
+	do 
+		awk '{s++}END{print s/4}' $file
+	done
+
+#All files match table 8 read count except for:
+
+	58,76, and 81.  They have significantly less in the files we received.  Results in file "ATGC_Table8_Read_counts_SF_check.xls"
+
+#I did not check plant sample read counts.  I checked the count number on the files given to us named "76.R1_val_1.fq" and found that this matched the trimmed reads in the Table 8 xls file delivered to us.  So this means for samples 58,76, and 81 our raw data does not match what the supposed output was.  But it is larger than the trimmed data, so I'm going to assume it is raw data for now.
+
+#To compare the overlap parameter, I tested 3 and 5 for the sample 100 reads:
+
+	Overlap 5:
+
+		
+=== Summary ===
+
+Total read pairs processed:            348,289
+  Read 1 with adapter:                 106,831 (30.7%)
+  Read 2 with adapter:                  96,006 (27.6%)
+Pairs that were too short:              10,871 (3.1%)
+Pairs written (passing filters):        37,511 (10.8%)
+
+	Overlap 3:
+
+
+=== Summary ===
+
+Total read pairs processed:            348,289
+  Read 1 with adapter:                 106,831 (30.7%)
+  Read 2 with adapter:                  96,006 (27.6%)
+Pairs that were too short:              10,871 (3.1%)
+Pairs written (passing filters):        37,511 (10.8%)
+
+Didn't seem to make a difference and 5 is considered more ocnservative.  I don't have enough space on the lcuster to run both for the entire sample set.
+
+#Returned:
+
+This is cutadapt 1.14 with Python 2.7.13
+Command line parameters: -a AYTGGGYDTAAAGNG...GGATTAGATACCCBNGTA -a ACCTGCGGARGGATCA...AACTTTYARCAAYGGATCTC -A TACNVGGGTATCTAATCC...CNCTTTAHRCCCART -A GAGATCCRTTGYTRAAAGTT...TGATCCYTCCGCAGGT --discard-untrimmed --match-read-wildcards -e 0.1 -O 5 -m 50 -o S2_R1_merged.cut.fastq -p S2_R2_merged.cut.fastq S2_R1_merged.fastq S2_R2_merged.fastq
+Trimming 4 adapters with at most 10.0% errors in paired-end mode ...
+Finished in 3700.14 s (53 us/read; 1.12 M reads/minute).
+
+=== Summary ===
+
+Total read pairs processed:         69,348,965
+  Read 1 with adapter:              56,060,960 (80.8%)
+  Read 2 with adapter:              51,928,162 (74.9%)
+Pairs that were too short:           1,460,564 (2.1%)
+Pairs written (passing filters):    46,955,072 (67.7%)
+
+Total basepairs processed: 20,432,280,128 bp
+  Read 1: 10,232,982,504 bp
+  Read 2: 10,199,297,624 bp
+Total written (filtered):  12,433,567,385 bp (60.9%)
+  Read 1: 6,308,312,147 bp
+  Read 2: 6,125,255,238 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: AYTGGGYDTAAAGNG...GGATTAGATACCCBNGTA; Type: linked; Length: 15+18; 5' trimmed: 36707339 times; 3' trimmed: 28382 times
+
+No. of allowed errors:
+0-9 bp: 0; 10-15 bp: 1
+
+No. of allowed errors:
+0-9 bp: 0; 10-18 bp: 1
+
+Overview of removed sequences at 5' end
+length  count   expect  max.err error counts
+14      426772  0.3     1       0 426772
+15      36221792        0.1     1       28312409 7909383
+16      58775   0.1     1       0 58775
+
+
+Overview of removed sequences at 3' end
+length  count   expect  max.err error counts
+5       28      67723.6 0       28
+6       3       16930.9 0       3
+7       89      4232.7  0       89
+8       48      1058.2  0       48
+9       185     264.5   0       173 12
+10      66      66.1    1       40 26
+11      18      16.5    1       12 6
+12      223     4.1     1       200 23
+13      135     1.0     1       120 15
+14      212     0.3     1       179 33
+15      344     0.1     1       287 57
+16      62      0.0     1       53 9
+17      675     0.0     1       384 291
+18      23058   0.0     1       19766 3292
+19      40      0.0     1       9 31
+20      1       0.0     1       1
+22      4       0.0     1       1 3
+23      15      0.0     1       10 5
+24      38      0.0     1       19 19
+25      17      0.0     1       11 6
+26      4       0.0     1       0 4
+27      9       0.0     1       2 7
+28      256     0.0     1       6 250
+29      28      0.0     1       1 27
+30      7       0.0     1       1 6
+31      23      0.0     1       8 15
+32      18      0.0     1       2 16
+33      57      0.0     1       2 55
+34      34      0.0     1       9 25
+35      31      0.0     1       13 18
+36      16      0.0     1       2 14
+37      1       0.0     1       0 1
+38      4       0.0     1       1 3
+39      40      0.0     1       2 38
+40      12      0.0     1       3 9
+41      5       0.0     1       3 2
+42      15      0.0     1       11 4
+43      5       0.0     1       3 2
+45      1       0.0     1       1
+46      2       0.0     1       1 1
+47      1       0.0     1       1
+48      1       0.0     1       0 1
+49      4       0.0     1       2 2
+50      2       0.0     1       2
+51      3       0.0     1       0 3
+53      1       0.0     1       0 1
+56      1       0.0     1       1
+61      2       0.0     1       2
+63      1       0.0     1       1
+64      1       0.0     1       0 1
+66      2       0.0     1       1 1
+72      1       0.0     1       0 1
+73      3       0.0     1       2 1
+74      6       0.0     1       4 2
+82      1       0.0     1       0 1
+84      1       0.0     1       1
+85      2       0.0     1       1 1
+87      11      0.0     1       9 2
+93      1       0.0     1       0 1
+94      1       0.0     1       0 1
+95      1       0.0     1       0 1
+96      2       0.0     1       0 2
+97      23      0.0     1       6 17
+98      37      0.0     1       13 24
+99      43      0.0     1       28 15
+100     23      0.0     1       10 13
+101     7       0.0     1       3 4
+102     2       0.0     1       0 2
+103     7       0.0     1       3 4
+104     2       0.0     1       0 2
+106     4       0.0     1       0 4
+107     5       0.0     1       5
+108     6       0.0     1       1 5
+109     4       0.0     1       1 3
+110     1       0.0     1       0 1
+111     12      0.0     1       3 9
+112     21      0.0     1       0 21
+113     36      0.0     1       10 26
+114     9       0.0     1       5 4
+115     499     0.0     1       288 211
+116     156     0.0     1       91 65
+117     61      0.0     1       36 25
+118     54      0.0     1       34 20
+119     4       0.0     1       1 3
+120     32      0.0     1       10 22
+121     9       0.0     1       6 3
+122     184     0.0     1       114 70
+123     16      0.0     1       15 1
+124     100     0.0     1       72 28
+125     127     0.0     1       113 14
+126     81      0.0     1       25 56
+127     90      0.0     1       40 50
+128     93      0.0     1       49 44
+129     42      0.0     1       24 18
+130     38      0.0     1       21 17
+131     30      0.0     1       18 12
+132     140     0.0     1       88 52
+133     114     0.0     1       79 35
+134     40      0.0     1       9 31
+135     341     0.0     1       1 340
+136     11      0.0     1       0 11
+
+=== First read: Adapter 4 ===
+
+Sequence: ACCTGCGGARGGATCA...AACTTTYARCAAYGGATCTC; Type: linked; Length: 16+20; 5' trimmed: 19353621 times; 3' trimmed: 1871083 times
+
+No. of allowed errors:
+0-9 bp: 0; 10-16 bp: 1
+
+No. of allowed errors:
+0-9 bp: 0; 10-19 bp: 1; 20 bp: 2
+
+Overview of removed sequences at 5' end
+length  count   expect  max.err error counts
+15      735281  0.1     1       0 735281
+16      18576792        0.0     1       15660803 2915989
+17      41548   0.0     1       0 41548
+
+
+Overview of removed sequences at 3' end
+length  count   expect  max.err error counts
+5       45364   67723.6 0       45364
+6       88756   16930.9 0       88756
+7       67143   4232.7  0       67143
+8       89835   1058.2  0       89835
+9       10952   264.5   0       10937 15
+10      1191    66.1    1       6 1185
+11      4978    16.5    1       3703 1275
+12      79501   4.1     1       68008 11493
+13      3246    1.0     1       685 2561
+14      3341    0.3     1       3004 337
+15      29098   0.1     1       25683 3415
+16      2729    0.0     1       2132 597
+17      4635    0.0     1       4025 610
+18      255     0.0     1       43 73 139
+19      1234606 0.0     1       1227319 6719 568
+20      188428  0.0     2       168289 15606 4533
+21      419     0.0     2       58 313 48
+22      9       0.0     2       3 3 3
+23      20      0.0     2       7 8 5
+24      121     0.0     2       54 46 21
+25      84      0.0     2       51 17 16
+26      563     0.0     2       262 183 118
+27      199     0.0     2       87 55 57
+28      30      0.0     2       6 6 18
+29      464     0.0     2       241 113 110
+30      417     0.0     2       160 119 138
+31      261     0.0     2       154 40 67
+32      544     0.0     2       75 152 317
+33      156     0.0     2       58 43 55
+34      1254    0.0     2       367 457 430
+35      1523    0.0     2       968 310 245
+36      515     0.0     2       242 135 138
+37      289     0.0     2       93 95 101
+38      822     0.0     2       696 85 41
+39      1069    0.0     2       629 229 211
+40      133     0.0     2       60 41 32
+41      36      0.0     2       25 7 4
+42      28      0.0     2       10 10 8
+43      26      0.0     2       15 6 5
+44      206     0.0     2       156 32 18
+45      29      0.0     2       18 5 6
+46      8       0.0     2       2 2 4
+47      12      0.0     2       4 6 2
+48      8       0.0     2       1 4 3
+49      4       0.0     2       3 1
+50      69      0.0     2       21 39 9
+51      28      0.0     2       5 6 17
+52      112     0.0     2       37 24 51
+53      22      0.0     2       7 7 8
+54      13      0.0     2       9 4
+55      9       0.0     2       8 0 1
+56      11      0.0     2       5 5 1
+57      13      0.0     2       6 5 2
+58      16      0.0     2       8 5 3
+59      7       0.0     2       4 1 2
+60      6       0.0     2       2 2 2
+61      25      0.0     2       17 6 2
+62      6       0.0     2       4 1 1
+63      52      0.0     2       47 5
+64      88      0.0     2       30 34 24
+65      32      0.0     2       19 7 6
+66      26      0.0     2       8 14 4
+67      1       0.0     2       1
+68      6       0.0     2       2 1 3
+69      1       0.0     2       1
+70      3       0.0     2       0 1 2
+71      2       0.0     2       0 2
+72      2       0.0     2       0 1 1
+73      4       0.0     2       0 3 1
+74      2       0.0     2       1 1
+75      14      0.0     2       2 6 6
+77      2       0.0     2       1 0 1
+78      7       0.0     2       5 0 2
+79      3       0.0     2       2 1
+81      5       0.0     2       2 0 3
+82      1       0.0     2       0 1
+83      4       0.0     2       1 0 3
+84      2       0.0     2       2
+86      13      0.0     2       0 0 13
+87      2       0.0     2       0 2
+88      3       0.0     2       2 1
+89      4       0.0     2       0 1 3
+90      7       0.0     2       4 1 2
+91      2       0.0     2       1 1
+92      6       0.0     2       3 2 1
+93      3       0.0     2       0 0 3
+94      4       0.0     2       1 0 3
+95      2       0.0     2       0 1 1
+96      2       0.0     2       0 0 2
+97      5       0.0     2       1 2 2
+98      4       0.0     2       0 2 2
+99      13      0.0     2       4 5 4
+100     12      0.0     2       1 3 8
+101     14      0.0     2       2 4 8
+102     3       0.0     2       0 0 3
+103     7       0.0     2       0 4 3
+104     37      0.0     2       0 9 28
+105     2       0.0     2       0 2
+106     4       0.0     2       0 1 3
+107     3       0.0     2       0 1 2
+108     7       0.0     2       0 3 4
+109     7       0.0     2       0 3 4
+110     7       0.0     2       0 3 4
+111     3       0.0     2       0 2 1
+112     24      0.0     2       7 10 7
+113     25      0.0     2       13 7 5
+114     11      0.0     2       3 4 4
+115     7       0.0     2       0 3 4
+116     17      0.0     2       2 6 9
+117     15      0.0     2       9 3 3
+118     5       0.0     2       1 3 1
+119     43      0.0     2       16 15 12
+120     61      0.0     2       27 13 21
+121     69      0.0     2       32 13 24
+122     42      0.0     2       18 17 7
+123     122     0.0     2       74 25 23
+124     103     0.0     2       46 32 25
+125     17      0.0     2       12 3 2
+126     280     0.0     2       172 59 49
+127     578     0.0     2       283 157 138
+128     700     0.0     2       391 163 146
+129     832     0.0     2       486 167 179
+130     2550    0.0     2       1592 530 428
+131     903     0.0     2       519 237 147
+132     50      0.0     2       32 12 6
+133     119     0.0     2       56 28 35
+134     370     0.0     2       0 246 124
+135     63      0.0     2       0 49 14
+
+=== Second read: Adapter 7 ===
+
+Sequence: TACNVGGGTATCTAATCC...CNCTTTAHRCCCART; Type: linked; Length: 18+15; 5' trimmed: 32803575 times; 3' trimmed: 34038 times
+
+No. of allowed errors:
+0-9 bp: 0; 10-18 bp: 1
+
+No. of allowed errors:
+0-9 bp: 0; 10-15 bp: 1
+
+Overview of removed sequences at 5' end
+length  count   expect  max.err error counts
+17      365896  0.0     1       0 365896
+18      32266193        0.0     1       29501743 2764450
+19      171486  0.0     1       0 171486
+
+
+Overview of removed sequences at 3' end
+length  count   expect  max.err error counts
+5       5751    67723.6 0       5751
+6       1119    16930.9 0       1119
+7       35      4232.7  0       35
+8       90      1058.2  0       90
+9       162     264.5   0       125 37
+10      265     66.1    1       71 194
+11      561     16.5    1       468 93
+12      218     4.1     1       1 217
+13      99      1.0     1       44 55
+14      720     0.3     1       368 352
+15      19141   0.1     1       10356 8785
+16      29      0.1     1       8 21
+17      17      0.1     1       4 13
+18      13      0.1     1       3 10
+19      14      0.1     1       3 11
+20      56      0.1     1       23 33
+21      78      0.1     1       43 35
+22      35      0.1     1       7 28
+23      14      0.1     1       8 6
+24      11      0.1     1       6 5
+25      13      0.1     1       12 1
+26      12      0.1     1       11 1
+27      13      0.1     1       11 2
+28      17      0.1     1       16 1
+29      25      0.1     1       23 2
+30      10      0.1     1       8 2
+31      17      0.1     1       8 9
+32      18      0.1     1       5 13
+33      11      0.1     1       9 2
+34      39      0.1     1       39
+35      3       0.1     1       1 2
+36      12      0.1     1       9 3
+37      26      0.1     1       7 19
+38      27      0.1     1       8 19
+39      9       0.1     1       1 8
+40      53      0.1     1       31 22
+41      14      0.1     1       8 6
+42      15      0.1     1       1 14
+43      3       0.1     1       2 1
+44      13      0.1     1       9 4
+45      9       0.1     1       4 5
+46      54      0.1     1       10 44
+47      39      0.1     1       1 38
+48      365     0.1     1       8 357
+49      9       0.1     1       6 3
+50      27      0.1     1       24 3
+51      15      0.1     1       10 5
+52      2       0.1     1       1 1
+53      10      0.1     1       10
+54      11      0.1     1       8 3
+55      59      0.1     1       9 50
+56      19      0.1     1       4 15
+57      80      0.1     1       14 66
+58      43      0.1     1       4 39
+59      10      0.1     1       4 6
+60      25      0.1     1       21 4
+61      13      0.1     1       2 11
+62      12      0.1     1       8 4
+63      9       0.1     1       4 5
+64      31      0.1     1       25 6
+65      7       0.1     1       5 2
+66      27      0.1     1       12 15
+67      12      0.1     1       4 8
+68      25      0.1     1       4 21
+69      11      0.1     1       2 9
+70      30      0.1     1       23 7
+71      43      0.1     1       29 14
+72      4       0.1     1       1 3
+73      2       0.1     1       1 1
+74      1       0.1     1       0 1
+75      4       0.1     1       2 2
+76      11      0.1     1       7 4
+77      2       0.1     1       2
+78      7       0.1     1       4 3
+79      14      0.1     1       3 11
+80      36      0.1     1       12 24
+81      29      0.1     1       8 21
+82      25      0.1     1       16 9
+83      6       0.1     1       1 5
+84      18      0.1     1       14 4
+86      1       0.1     1       1
+88      9       0.1     1       3 6
+89      8       0.1     1       4 4
+90      8       0.1     1       3 5
+91      9       0.1     1       1 8
+92      6       0.1     1       2 4
+93      5       0.1     1       2 3
+94      9       0.1     1       2 7
+95      2       0.1     1       0 2
+96      8       0.1     1       7 1
+97      43      0.1     1       14 29
+98      170     0.1     1       32 138
+99      234     0.1     1       26 208
+100     373     0.1     1       22 351
+101     87      0.1     1       6 81
+102     1       0.1     1       0 1
+103     21      0.1     1       9 12
+104     14      0.1     1       6 8
+105     37      0.1     1       12 25
+106     11      0.1     1       2 9
+108     63      0.1     1       8 55
+109     46      0.1     1       1 45
+110     190     0.1     1       36 154
+111     81      0.1     1       20 61
+112     198     0.1     1       55 143
+113     155     0.1     1       70 85
+114     42      0.1     1       11 31
+115     112     0.1     1       63 49
+116     14      0.1     1       6 8
+117     166     0.1     1       82 84
+118     39      0.1     1       20 19
+119     408     0.1     1       238 170
+120     27      0.1     1       7 20
+121     69      0.1     1       30 39
+122     73      0.1     1       7 66
+123     48      0.1     1       24 24
+124     70      0.1     1       41 29
+125     46      0.1     1       20 26
+126     42      0.1     1       12 30
+127     58      0.1     1       43 15
+128     60      0.1     1       22 38
+129     149     0.1     1       79 70
+130     153     0.1     1       50 103
+131     117     0.1     1       55 62
+132     601     0.1     1       47 554
+133     21      0.1     1       5 16
+
+=== Second read: Adapter 10 ===
+
+Sequence: GAGATCCRTTGYTRAAAGTT...TGATCCYTCCGCAGGT; Type: linked; Length: 20+16; 5' trimmed: 19124587 times; 3' trimmed: 1547539 times
+
+No. of allowed errors:
+0-9 bp: 0; 10-19 bp: 1; 20 bp: 2
+
+No. of allowed errors:
+0-9 bp: 0; 10-16 bp: 1
+
+Overview of removed sequences at 5' end
+length  count   expect  max.err error counts
+18      24846   0.0     1       0 0 24846
+19      329355  0.0     1       0 252700 76655
+20      18373350        0.0     2       15360436 1801198 1211716
+21      233789  0.0     2       0 139128 94661
+22      163247  0.0     2       0 0 163247
+
+
+Overview of removed sequences at 3' end
+length  count   expect  max.err error counts
+5       3176    67723.6 0       3176
+6       39431   16930.9 0       39431
+7       242     4232.7  0       242
+8       49363   1058.2  0       49363
+9       2968    264.5   0       2955 13
+10      328     66.1    1       118 210
+11      31712   16.5    1       28051 3661
+12      56      4.1     1       5 51
+13      556     1.0     1       434 122
+14      3525    0.3     1       2970 555
+15      1198115 0.1     1       1192214 5901
+16      203603  0.0     1       111488 92115
+17      272     0.0     1       60 212
+18      77      0.0     1       61 16
+19      40      0.0     1       26 14
+20      154     0.0     1       104 50
+21      96      0.0     1       70 26
+22      382     0.0     1       199 183
+23      184     0.0     1       102 82
+24      22      0.0     1       16 6
+25      368     0.0     1       232 136
+26      538     0.0     1       355 183
+27      267     0.0     1       201 66
+28      159     0.0     1       64 95
+29      115     0.0     1       89 26
+30      771     0.0     1       319 452
+31      1355    0.0     1       987 368
+32      866     0.0     1       736 130
+33      573     0.0     1       276 297
+34      148     0.0     1       85 63
+35      267     0.0     1       184 83
+36      451     0.0     1       348 103
+37      39      0.0     1       17 22
+38      130     0.0     1       119 11
+39      91      0.0     1       51 40
+40      43      0.0     1       24 19
+41      60      0.0     1       51 9
+42      12      0.0     1       6 6
+43      22      0.0     1       20 2
+44      6       0.0     1       3 3
+45      57      0.0     1       51 6
+46      30      0.0     1       13 17
+47      19      0.0     1       11 8
+48      61      0.0     1       32 29
+49      38      0.0     1       29 9
+50      16      0.0     1       11 5
+51      9       0.0     1       5 4
+52      18      0.0     1       10 8
+53      13      0.0     1       9 4
+54      24      0.0     1       13 11
+55      16      0.0     1       9 7
+56      12      0.0     1       8 4
+57      41      0.0     1       29 12
+58      12      0.0     1       6 6
+59      46      0.0     1       34 12
+60      117     0.0     1       71 46
+61      83      0.0     1       44 39
+62      84      0.0     1       63 21
+63      15      0.0     1       11 4
+64      36      0.0     1       21 15
+65      9       0.0     1       4 5
+66      25      0.0     1       6 19
+67      18      0.0     1       11 7
+68      46      0.0     1       34 12
+69      23      0.0     1       20 3
+70      25      0.0     1       15 10
+71      12      0.0     1       11 1
+72      4       0.0     1       2 2
+73      9       0.0     1       3 6
+74      6       0.0     1       2 4
+75      13      0.0     1       10 3
+76      11      0.0     1       7 4
+77      8       0.0     1       6 2
+78      7       0.0     1       4 3
+79      9       0.0     1       5 4
+80      10      0.0     1       2 8
+81      31      0.0     1       22 9
+82      12      0.0     1       4 8
+83      9       0.0     1       4 5
+84      8       0.0     1       5 3
+85      5       0.0     1       4 1
+86      6       0.0     1       2 4
+87      6       0.0     1       3 3
+88      15      0.0     1       7 8
+89      7       0.0     1       5 2
+90      3       0.0     1       2 1
+91      8       0.0     1       4 4
+92      8       0.0     1       5 3
+93      7       0.0     1       2 5
+94      3       0.0     1       1 2
+95      6       0.0     1       2 4
+96      4       0.0     1       2 2
+97      5       0.0     1       2 3
+98      11      0.0     1       3 8
+99      10      0.0     1       3 7
+100     21      0.0     1       11 10
+101     7       0.0     1       2 5
+102     11      0.0     1       6 5
+103     7       0.0     1       3 4
+104     12      0.0     1       2 10
+105     15      0.0     1       5 10
+106     15      0.0     1       8 7
+107     9       0.0     1       2 7
+108     27      0.0     1       3 24
+109     52      0.0     1       9 43
+110     23      0.0     1       8 15
+111     33      0.0     1       3 30
+112     41      0.0     1       13 28
+113     68      0.0     1       17 51
+114     37      0.0     1       10 27
+115     67      0.0     1       5 62
+116     60      0.0     1       5 55
+117     88      0.0     1       11 77
+118     25      0.0     1       2 23
+119     100     0.0     1       5 95
+120     56      0.0     1       3 53
+121     15      0.0     1       2 13
+122     176     0.0     1       1 175
+123     373     0.0     1       5 368
+124     358     0.0     1       16 342
+125     654     0.0     1       51 603
+126     1802    0.0     1       10 1792
+127     932     0.0     1       15 917
+128     105     0.0     1       63 42
+129     154     0.0     1       70 84
+130     445     0.0     1       171 274
+131     21      0.0     1       6 15
+132     1       0.0     1       0 1
+
+#Look at FastQC again of trimmed seqs
+
+./software/FastQC/fastqc ./seqfiles/soil_only/cleaned_seqs/S2_R1_merged.cut.fastq --outdir=/lustre/project/svanbael/steve/seqfiles/soil_only/cleaned_seqs/FastQC_R1_trimmed_out
+
+./software/FastQC/fastqc ./seqfiles/soil_only/cleaned_seqs/S2_R1_merged.cut.fastq --outdir=/lustre/project/svanbael/steve/seqfiles/soil_only/cleaned_seqs/FastQC_R2_trimmed_out
+
+#Run PEAR to align
+
+pear-0.9.10-bin-64 -f ./S2_R1_merged.cut.fastq -r ./S2_R2_merged.cut.fastq -o ./S2_trimmed -n 100 -j 20
+
+#Started at 3:08pm ended at 3:18pm
+
+PEAR v0.9.10 [May 30, 2016]
+
+Citation - PEAR: a fast and accurate Illumina Paired-End reAd mergeR
+Zhang et al (2014) Bioinformatics 30(5): 614-620 | doi:10.1093/bioinformatics/btt593
+
+Forward reads file.................: ./S2_R1_merged.cut.fastq
+Reverse reads file.................: ./S2_R2_merged.cut.fastq
+PHRED..............................: 33
+Using empirical frequencies........: YES
+Statistical method.................: OES
+Maximum assembly length............: 999999
+Minimum assembly length............: 100
+p-value............................: 0.010000
+Quality score threshold (trimming).: 0
+Minimum read size after trimming...: 1
+Maximal ratio of uncalled bases....: 1.000000
+Minimum overlap....................: 10
+Scoring method.....................: Scaled score
+Threads............................: 20
+
+Allocating memory..................: 200,000,000 bytes
+Computing empirical frequencies....: DONE
+  A: 0.230545
+  C: 0.263754
+  G: 0.252193
+  T: 0.253507
+  464961 uncalled bases
+Assemblying reads: 100%
+
+Assembled reads ...................: 45,708,023 / 46,955,072 (97.344%)
+Discarded reads ...................: 0 / 46,955,072 (0.000%)
+Not assembled reads ...............: 1,247,049 / 46,955,072 (2.656%)
+Assembled reads file...............: ./S2_trimmed.assembled.fastq
+Discarded reads file...............: ./S2_trimmed.discarded.fastq
+Unassembled forward reads file.....: ./S2_trimmed.unassembled.forward.fastq
+Unassembled reverse reads file.....: ./S2_trimmed.unassembled.reverse.fastq
+
