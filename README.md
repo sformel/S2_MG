@@ -10,4 +10,4 @@ _Please note that the notes contain references to 16S sequences, which ultimatel
 
 _Portions of the 16S sequences were used in another paper:_
 
-[Rhizosphere microbial communities reflect genotypic and trait variation in a salt marsh ecosystem engineer](DOI: 10.1002/ajb2.1497)
+[Rhizosphere microbial communities reflect genotypic and trait variation in a salt marsh ecosystem engineer](https://bsapubs.onlinelibrary.wiley.com/doi/10.1002/ajb2.1497)
