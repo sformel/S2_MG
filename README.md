@@ -4,7 +4,7 @@ The S2 Metagenomic project in the Van Bael lab. Examination of soil fungal commu
 [Published in Wetlands Ecology and Management.](https://link.springer.com/article/10.1007%2Fs11273-021-09848-y)
 
 
-_Note from Steve Formel:  This was my first big project as a graduate, and that's probably pretty clear from the state of the code.  Everything functions, but some of the commenting and structure may be a little unclear.  If you have any questions, please feel free to contact me.  I'm also happy to share intemediate products and outputs that were too large to host here on github._  
+_Note from Steve Formel:  This was my first big project as a graduate student, and that's probably pretty clear from the state of the code.  Everything functions, but some of the commenting and structure may be a little unclear.  If you have any questions, please feel free to contact me.  I'm also happy to share intemediate products and outputs that were too large to host here on github._  
 
 _Please note that the notes contain references to 16S sequences, which ultimately weren't included in the paper linked above._
 
